@@ -2,12 +2,10 @@ import './style.css'
 
 import * as THREE from 'three';
 
-import Stats from 'three/examples/jsm/libs/stats.module.js';
-
-import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 let container
 let camera, scene, raycaster, renderer;
@@ -108,29 +106,49 @@ function init() {
 
   updateSun();
 
+  //ADD ASSETS
+  function createBox() {
+    const geometry = new THREE.BoxGeometry(30, 30, 30);
+    const material = new THREE.MeshStandardMaterial({ color: 0xCC0000, roughness: 0 });
+
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+  }
+
+  //createBox();
+
+  function createShip() {
+    const loader = new GLTFLoader();
+
+    loader.load('./assets/ship.gltf', function (gltf) {
+
+      let ship = gltf.scene.children[0]
+      ship.position.set(1,-2,1)
+      ship.scale.set(0.5,0.5,0.5)
+      ship.material.opacity = 0.5;
+      console.log(ship)
+      
+      scene.add(gltf.scene);
+
+    }, undefined, function (error) {
+
+      console.error(error);
+    });
+  }
+
+  createShip()
+
+
   //
 
-  const geometry = new THREE.BoxGeometry(30, 30, 30);
-  const material = new THREE.MeshStandardMaterial({ color:0xCC0000, roughness: 0 });
-
-  mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  //
-
-  // controls = new OrbitControls(camera, renderer.domElement);
-  // controls.maxPolarAngle = Math.PI * 0.495;
-  // controls.target.set(0, 10, 0);
-  // controls.minDistance = 40.0;
-  // controls.maxDistance = 200.0;
-  // controls.update();
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.maxPolarAngle = Math.PI * 0.495;
+  controls.target.set(0, 10, 0);
+  controls.minDistance = 40.0;
+  controls.maxDistance = 200.0;
+  controls.update();
 
   //
-
-  container.addEventListener('click', onPointerMove)
-
-  window.addEventListener('resize', onWindowResize);
-
 }
 
 function onWindowResize() {
@@ -161,27 +179,27 @@ function render() {
 
   raycaster.setFromCamera(pointer, camera);
 
-  const intersects = raycaster.intersectObjects(mesh, true);
+  // const intersects = raycaster.intersectObjects(mesh, true);
 
-  if (intersects.length > 0) {
+  // if (intersects.length > 0) {
 
-    if (INTERSECTED != intersects[0].object) {
+  //   if (INTERSECTED != intersects[0].object) {
 
-      if (INTERSECTED) INTERSECTED.material.setHex(INTERSECTED.currentHex);
+  //     if (INTERSECTED) INTERSECTED.material.setHex(INTERSECTED.currentHex);
 
-      INTERSECTED = intersects[0].object;
-      INTERSECTED.currentHex = INTERSECTED.material.getHex();
-      INTERSECTED.material.setHex(0xff0000);
+  //     INTERSECTED = intersects[0].object;
+  //     INTERSECTED.currentHex = INTERSECTED.material.getHex();
+  //     INTERSECTED.material.setHex(0xff0000);
 
-    }
+  //   }
 
-  } else {
+  // } else {
 
-    if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+  //   if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 
-    INTERSECTED = null;
+  //   INTERSECTED = null;
 
-  }
+  // }
 
   renderer.render(scene, camera);
 
