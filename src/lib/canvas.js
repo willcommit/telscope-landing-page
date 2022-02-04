@@ -1,4 +1,4 @@
-import './style.css'
+import './canvas.css'
 
 import * as THREE from 'three';
 
@@ -7,45 +7,42 @@ import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import { get } from 'svelte/store';
+import { showModal } from '../stores.js';
+
+import waternormals from "../assets/waternormals.jpg";
+
 let container
-let camera, scene, raycaster, renderer;
+let camera, scene, renderer;
 let controls, water, sun, mesh;
 
-let INTERSECTED;
-let theta = 0;
+const raycaster = new THREE.Raycaster(); // create once
+const clickMouse = new THREE.Vector2();  // create once
+const moveMouse = new THREE.Vector2();   // create once
+
+var interactable
 
 const pointer = new THREE.Vector2();
 const radius = 100;
 
-function init() {
+function init(bg) {
 
-  container = document.getElementById('bg');
-
-  //
-
-  raycaster = new THREE.Raycaster();
-
-  //
-
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer( {canvas: bg});
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  container.appendChild(renderer.domElement);
+  //container.appendChild(renderer.domElement);
 
   //
-
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 20000);
   camera.position.set(30, 30, 100);
-
   //
 
   sun = new THREE.Vector3();
 
   // Water
-
   const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
 
   water = new Water(
@@ -53,7 +50,7 @@ function init() {
     {
       textureWidth: 512,
       textureHeight: 512,
-      waterNormals: new THREE.TextureLoader().load('assets/waternormals.jpg', function (texture) {
+      waterNormals: new THREE.TextureLoader().load(waternormals, function (texture) {
 
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
@@ -120,7 +117,7 @@ function init() {
   function createShip() {
     const loader = new GLTFLoader();
 
-    loader.load('./assets/ship.gltf', function (gltf) {
+    loader.load('src/assets/ship.gltf', function (gltf) {
 
       let ship = gltf.scene.children[0]
       ship.position.set(1,-2,1)
@@ -140,15 +137,15 @@ function init() {
 
 
   //
-
   controls = new OrbitControls(camera, renderer.domElement);
   controls.maxPolarAngle = Math.PI * 0.495;
   controls.target.set(0, 10, 0);
   controls.minDistance = 40.0;
   controls.maxDistance = 200.0;
   controls.update();
-
   //
+
+  window.addEventListener( 'resize', onWindowResize );
 }
 
 function onWindowResize() {
@@ -160,10 +157,35 @@ function onWindowResize() {
 
 }
 
-function onPointerMove(event) {
+function intersect(pos) {
+  raycaster.setFromCamera(pos, camera);
+  return raycaster.intersectObjects(scene.children);
+}
 
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+window.addEventListener('click', event => {
+  // if (draggable != null) {
+  //   console.log(`dropping draggable ${draggable.userData.name}`)
+  //   draggable = null as any
+  //   return;
+  // }
+
+  // THREE RAYCASTER
+  clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  const found = intersect(clickMouse);
+  if (found[0].object.name === 'ship') {
+    showModal.update(n => n=true)
+  }
+})
+
+function render() {
+
+  water.material.uniforms['time'].value += 1.0 / 60.0;
+
+  raycaster.setFromCamera(pointer, camera);
+
+  renderer.render(scene, camera);
 
 }
 
@@ -173,37 +195,9 @@ function animate() {
   render();
 }
 
-function render() {
 
-  water.material.uniforms['time'].value += 1.0 / 60.0;
-
-  raycaster.setFromCamera(pointer, camera);
-
-  // const intersects = raycaster.intersectObjects(mesh, true);
-
-  // if (intersects.length > 0) {
-
-  //   if (INTERSECTED != intersects[0].object) {
-
-  //     if (INTERSECTED) INTERSECTED.material.setHex(INTERSECTED.currentHex);
-
-  //     INTERSECTED = intersects[0].object;
-  //     INTERSECTED.currentHex = INTERSECTED.material.getHex();
-  //     INTERSECTED.material.setHex(0xff0000);
-
-  //   }
-
-  // } else {
-
-  //   if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-
-  //   INTERSECTED = null;
-
-  // }
-
-  renderer.render(scene, camera);
-
+export const createCanvas = (bg) => {
+  init(bg);
+  animate();
 }
 
-init();
-animate();
