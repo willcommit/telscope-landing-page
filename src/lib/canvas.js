@@ -120,10 +120,7 @@ function init(bg) {
     loader.load('src/assets/ship.gltf', function (gltf) {
 
       let ship = gltf.scene.children[0]
-      ship.position.set(1,-2,1)
-      ship.scale.set(0.5,0.5,0.5)
-      ship.material.opacity = 0.5;
-      console.log(ship)
+      
       
       scene.add(gltf.scene);
 
@@ -175,7 +172,8 @@ window.addEventListener('click', event => {
 
   const found = intersect(clickMouse);
   if (found[0].object.name === 'ship') {
-    showModal.update(n => n=true)
+    console.log(found)
+    //showModal.update(n => n=true)
   }
 })
 
