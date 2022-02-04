@@ -8,13 +8,10 @@ canvas {
   left: 0;
 }
 
-
 .modal {
   position: absolute;
-
 	z-index: 100;
-
-  display: block;
+  display: none;
   position: fixed;
   z-index: 1;
   padding-top: 80px;
