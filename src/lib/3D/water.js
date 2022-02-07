@@ -29,5 +29,5 @@ import waternormals from "../../assets/waternormals.jpg";
  }
 
  export function waterPhysics() {
-    water.material.uniforms['time'].value += 1.0 / 60.0;
+    water.material.uniforms['time'].value += 0.5 / 60.0;
  }

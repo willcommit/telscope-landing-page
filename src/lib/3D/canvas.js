@@ -6,9 +6,20 @@ import { createWater, waterPhysics, water } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { createShip } from './models';
-import { addHoverEventHighlight, addClickEventOpenModal } from './events'
+import { addHoverEventHighlight, addClickEventOpenModal } from './events';
+import { addCurve } from './curves';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-let scene, renderer;
+let scene, renderer, composer;
+
+const params = {
+  exposure: 0.1,
+  bloomStrength: 0.5,
+  bloomThreshold: 0,
+  bloomRadius: 0
+};
 
 function init(bg) {
 
@@ -24,8 +35,21 @@ function init(bg) {
   createSky(scene, renderer, water)
   createOrbitCamera(camera, renderer)
   createShip(scene)
-  addHoverEventHighlight(camera, scene)
+  //addHoverEventHighlight(camera, scene)
   addClickEventOpenModal(camera, scene)
+  addCurve(scene)
+
+
+  const renderScene = new RenderPass(scene, camera);
+
+  const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+  bloomPass.threshold = params.bloomThreshold;
+  bloomPass.strength = params.bloomStrength;
+  bloomPass.radius = params.bloomRadius;
+
+  composer = new EffectComposer(renderer);
+  composer.addPass(renderScene);
+  composer.addPass(bloomPass);
 
   window.addEventListener('resize', onWindowResize);
 }
@@ -40,9 +64,9 @@ function onWindowResize() {
 
 function render() {
 
-  waterPhysics();
+  //waterPhysics();
 
-  renderer.render(scene, camera);
+  composer.render();
 }
 
 function animate() {

@@ -6,8 +6,8 @@ let sun = new Vector3();
 const sky = new Sky();
 
 export function createSky(scene, renderer, water) {
-    sky.scale.setScalar(10000);
-    scene.add(sky);
+    sky.scale.setScalar(1000);
+    //scene.add(sky);
 
     const skyUniforms = sky.material.uniforms;
 
@@ -17,7 +17,7 @@ export function createSky(scene, renderer, water) {
     skyUniforms['mieDirectionalG'].value = 0.8;
 
     const parameters = {
-        elevation: 2,
+        elevation: -10,
         azimuth: 180
     };
 
