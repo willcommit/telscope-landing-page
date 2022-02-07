@@ -3,7 +3,7 @@
   // import Counter from './lib/Counter.svelte'
 
   import { onMount } from 'svelte'
-  import { createCanvas } from "./lib/canvas"
+  import { createCanvas } from "./lib/3D/canvas"
   import Modal from "./lib/modal.svelte"
 
   let bg;
