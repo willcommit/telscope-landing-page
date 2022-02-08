@@ -1,36 +1,25 @@
-import { MathUtils, Vector3, PMREMGenerator } from 'three';
+import {  Vector3, ShaderMaterial, Color, DoubleSide, SphereGeometry, Mesh } from 'three';
+import StarrySkyShader from './StarrySkyShader';
 
-import { Sky } from 'three/examples/jsm/objects/Sky.js'
 
-let sun = new Vector3();
-const sky = new Sky();
-
-export function createSky(scene, renderer, water) {
-    sky.scale.setScalar(1000);
-    //scene.add(sky);
-
-    const skyUniforms = sky.material.uniforms;
-
-    skyUniforms['turbidity'].value = 10;
-    skyUniforms['rayleigh'].value = 2;
-    skyUniforms['mieCoefficient'].value = 0.005;
-    skyUniforms['mieDirectionalG'].value = 0.8;
-
-    const parameters = {
-        elevation: -10,
-        azimuth: 180
-    };
-
-    const pmremGenerator = new PMREMGenerator(renderer);
-
-    //Create Sun
-    const phi = MathUtils.degToRad(90 - parameters.elevation);
-    const theta = MathUtils.degToRad(parameters.azimuth);
-
-    sun.setFromSphericalCoords(1, phi, theta);
-
-    sky.material.uniforms['sunPosition'].value.copy(sun);
-    water.material.uniforms['sunDirection'].value.copy(sun).normalize();
-
-    scene.environment = pmremGenerator.fromScene(sky).texture;
+export function createSky(scene) {
+    var skyDomeRadius = 1000.01;
+    var sphereMaterial = new ShaderMaterial({
+        uniforms: {
+            skyRadius: { value: skyDomeRadius },
+            //env_c1: { value: new Color("#0d1a2f") },
+            //env_c2: { value: new Color("#0f8682") },
+            noiseOffset: { value: new Vector3(100.01, 100.01, 100.01)},
+            starSize: { value: 0.01 },
+            starDensity: { value: 0.001 },
+            clusterStrength: { value: 0.002 },
+            clusterSize: { value: 0.001 },
+        },
+        vertexShader: StarrySkyShader.vertexShader,
+        fragmentShader: StarrySkyShader.fragmentShader,
+        side: DoubleSide,
+    })
+    var sphereGeometry = new SphereGeometry(skyDomeRadius, 20, 20);
+    var skyDome = new Mesh(sphereGeometry, sphereMaterial);
+    scene.add(skyDome);
 }

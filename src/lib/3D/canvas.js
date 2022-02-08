@@ -7,7 +7,7 @@ import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { createShip } from './models';
 import { addHoverEventHighlight, addClickEventOpenModal } from './events';
-import { addCurve } from './curves';
+import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -15,10 +15,10 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 let scene, renderer, composer;
 
 const params = {
-  exposure: 0.1,
-  bloomStrength: 0.5,
+  exposure: 0.3,
+  bloomStrength: 0.8,
   bloomThreshold: 0,
-  bloomRadius: 0
+  bloomRadius: 1
 };
 
 function init(bg) {
@@ -32,12 +32,12 @@ function init(bg) {
   scene = new THREE.Scene();
 
   createWater(scene);
-  createSky(scene, renderer, water)
+  createSky(scene)
   createOrbitCamera(camera, renderer)
   createShip(scene)
   //addHoverEventHighlight(camera, scene)
   addClickEventOpenModal(camera, scene)
-  addCurve(scene)
+  addShoreCurve(scene)
 
 
   const renderScene = new RenderPass(scene, camera);

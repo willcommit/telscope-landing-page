@@ -11,7 +11,7 @@ const point = new Vector3();
 
 const ARC_SEGMENTS = 200;
 
-export function addCurve(scene) {
+export function addShoreCurve(scene) {
 
     const curve = new CatmullRomCurve3([
         new Vector3(-1, 30, 20.5),
@@ -19,14 +19,14 @@ export function addCurve(scene) {
         new Vector3(800, 0, 5)
     ]);
 
-    const geometry = new TubeGeometry(curve,50, 0.3, 8, false)
+    const geometry = new TubeGeometry(curve,80, 0.3, 8, false)
 
     // const points = curve.getPoints(100);
     // const geometry = new BufferGeometry().setFromPoints(points);
 
     const material = new MeshBasicMaterial({
         blending: AdditiveBlending,
-        color: 0x4444aa,
+        color: 0x0086ff,
         side: DoubleSide,
         depthWrite: false,
         transparent: true
