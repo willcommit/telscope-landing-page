@@ -5,6 +5,8 @@
   import { onMount } from 'svelte'
   import { createCanvas } from "./lib/3D/canvas"
   import Modal from "./lib/modal.svelte"
+  import Logo from "./lib/logo.svelte"
+  import Navigation from "./lib/navigation.svelte"
 
   let bg;
 
@@ -16,6 +18,8 @@
 
 <main>
   <canvas bind:this={bg}></canvas>
+  <Logo></Logo>
+  <Navigation></Navigation>
   <Modal></Modal>
 </main>
 

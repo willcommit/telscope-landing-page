@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { createWater, waterPhysics, water } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
-import { createShip, createLand} from './models';
+import { createShip, createLand, createDataCenter} from './models';
 import { addHoverEventHighlight, addClickEventOpenModal } from './events';
 import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -33,9 +33,9 @@ function init(bg) {
 
   createWater(scene);
   createSky(scene)
-  createOrbitCamera(camera, renderer)
   createShip(scene)
   createLand(scene)
+  createDataCenter(scene)
   //addHoverEventHighlight(camera, scene)
   addClickEventOpenModal(camera, scene)
   addShoreCurve(scene)

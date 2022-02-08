@@ -5,7 +5,6 @@ export function createShip(scene) {
   const loader = new GLTFLoader();
 
   loader.load('src/assets/ship.gltf', function (gltf) {
-    console.log(gltf.scene.children[0]);
 
     let ship = gltf.scene.children[2]
     ship.material.opacity = 0.2;
@@ -26,14 +25,24 @@ export function createLand(scene) {
   const loader = new GLTFLoader();
 
   loader.load('src/assets/land.gltf', function (gltf) {
-    
-
+    console.log(gltf.scene)
     scene.add(gltf.scene);
-    // scene.add(engine);
-    // scene.add(antenna)
 
   }, undefined, function (error) {
 
     console.error(error);
   });
 } 
+
+export function createDataCenter(scene) {
+    const loader = new GLTFLoader();
+  
+    loader.load('src/assets/dc.gltf', function (gltf) {
+      
+      scene.add(gltf.scene);
+  
+    }, undefined, function (error) {
+  
+      console.error(error);
+    });
+  } 
