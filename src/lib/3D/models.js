@@ -11,7 +11,22 @@ export function createShip(scene) {
     ship.material.opacity = 0.2;
 
     let engine = gltf.scene.children[1]
-    engine.material = ship.material
+    //engine.material = ship.material
+
+    scene.add(gltf.scene);
+
+  }, undefined, function (error) {
+
+    console.error(error);
+  });
+} 
+
+
+export function createLand(scene) {
+  const loader = new GLTFLoader();
+
+  loader.load('src/assets/land.gltf', function (gltf) {
+    
 
     scene.add(gltf.scene);
     // scene.add(engine);
