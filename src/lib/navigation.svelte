@@ -1,4 +1,6 @@
 <script>
+    $: forwardFilled = true;
+    $: backwardFilled = true;
     let i = 0;
     let headers = [
         { id: 1, text: `Welcome` },
@@ -9,20 +11,26 @@
 
     function forwardClick() {
         if (i < headers.length-1) {
+            forwardFilled = true;
             i += 1;
-        }
+        } else if (i === headers.length-1) {
+            forwardFilled = false
+        }  
     }
 
     function backwardClick() {
         if (i > 0) {
             i -= 1;
+            forwardFilled = true;
+        }else if(i === 0 ){
+            backwardFilled = false;
         }
     }
 </script>
 
 <div class="navigation">
-    <button on:click={backwardClick} class="arrow">
-        <div class="icon-backward">
+    <button  on:click={backwardClick} class="arrow" >
+        <div class="icon-backward" class:backwardFilled>
             <svg
                 width="11"
                 height="7"
@@ -44,7 +52,7 @@
         <div class="inner">{headers[i].text}</div>
     </div>
     <button on:click={forwardClick} class="arrow">
-        <div class="icon-forward">
+        <div class="icon-forward" class:forwardFilled >
             <svg
                 width="11"
                 height="7"
@@ -108,11 +116,11 @@
         transform: rotate(90deg);
     }
 
-    .icon-forward svg * {
+    .forwardFilled svg * {
         fill: black;
     }
 
-    .icon-backward svg * {
+    .backwardFilled svg * {
         fill: black;
     }
 </style>
