@@ -1,6 +1,8 @@
 <script>
+    import { showEngine } from "../stores.js";
+    
     $: forwardFilled = true;
-    $: backwardFilled = true;
+    $: backwardFilled = false;
     let i = 0;
     let headers = [
         { id: 1, text: `Welcome` },
@@ -10,26 +12,32 @@
     ];
 
     function forwardClick() {
-        if (i < headers.length-1) {
+        if (i < headers.length - 1) {
             forwardFilled = true;
+            backwardFilled = true;
             i += 1;
-        } else if (i === headers.length-1) {
-            forwardFilled = false
-        }  
+        } else if (i === headers.length - 1) {
+            forwardFilled = false;
+        }
+
+        if(i === headers[1].id) {
+            $showEngine = true
+        }
     }
 
     function backwardClick() {
         if (i > 0) {
             i -= 1;
             forwardFilled = true;
-        }else if(i === 0 ){
+            backwardFilled = true;
+        } else if (i === 0) {
             backwardFilled = false;
         }
     }
 </script>
 
 <div class="navigation">
-    <button  on:click={backwardClick} class="arrow" >
+    <button on:click={backwardClick} class="arrow">
         <div class="icon-backward" class:backwardFilled>
             <svg
                 width="11"
@@ -52,7 +60,7 @@
         <div class="inner">{headers[i].text}</div>
     </div>
     <button on:click={forwardClick} class="arrow">
-        <div class="icon-forward" class:forwardFilled >
+        <div class="icon-forward" class:forwardFilled>
             <svg
                 width="11"
                 height="7"

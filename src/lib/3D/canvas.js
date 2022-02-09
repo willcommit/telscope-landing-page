@@ -33,6 +33,11 @@ function init(bg) {
 
   createWater(scene);
   createSky(scene)
+  createOrbitCamera(renderer)
+
+  // const helper = new THREE.CameraHelper( camera );
+  // scene.add( helper );
+
   createShip(scene)
   createLand(scene)
   createDataCenter(scene)
@@ -65,7 +70,7 @@ function onWindowResize() {
 
 function render() {
 
-  //waterPhysics();
+  waterPhysics();
 
   composer.render();
 }

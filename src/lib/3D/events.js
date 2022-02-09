@@ -45,7 +45,8 @@ export function addClickEventOpenModal(camera, scene) {
 
         const found = intersect(clickMouse, camera, scene);
 
-        if (found[0].object.name === 'ship') {
+        if (found[2].object.name === 'ship') {
+
             showModal.update(n => n = true)
         }
     })

@@ -15,8 +15,8 @@ export function addShoreCurve(scene) {
 
     const curve = new CatmullRomCurve3([
         new Vector3(-1, 30, 20.5),
-        new Vector3(200, 200, 5),
-        new Vector3(800, 0, 5)
+        new Vector3(-200, 150, -100),
+        new Vector3(-460, 8, -240)
     ]);
 
     const geometry = new TubeGeometry(curve,80, 0.3, 8, false)

@@ -11,6 +11,6 @@
         position: absolute;
         z-index: 100;
         margin: 1rem;
-        width: 200px;
+        width: 250px;
     }
 </style>
