@@ -1,8 +1,8 @@
 import { BufferGeometry, Float32BufferAttribute, Points, PointsMaterial } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import shipModel from '../../assets/ship.gltf?raw';
-import landModel from '../../assets/land.gltf?raw';
-import dataCenterdModel from '../../assets/dc.gltf?raw';
+import shipModel from '../../assets/ship.gltf?url';
+import landModel from '../../assets/land.gltf?url';
+import dataCenterdModel from '../../assets/dc.gltf?url';
 
 
 export function createShip(scene) {
