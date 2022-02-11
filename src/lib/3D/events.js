@@ -1,35 +1,26 @@
 import { Raycaster, Vector2, WebGLRenderer } from "three";
-import { showEngine } from '../../stores.js';
+import { activeCamera } from '../../stores.js';
+import { cameras } from './camera'
 
 const clickMouse = new Vector2();
-const moveMouse = new Vector2();
 const raycaster = new Raycaster();
 const pointer = new Vector2();
 let INTERSECTED;
 
-export function listenEvents(camera, scene, renderer) {
+export function listenEvents(sceneCamera, scene, renderer) {
     
+    activeCamera.subscribe((value) => {
 
-    showEngine.subscribe((value) => {
-        if(value === true ){
-            let ship = scene.getObjectByName("ship")
-            let engine = scene.getObjectByName("Engines")
-            let antenna = scene.getObjectByName("Antenna")
+        let ship = scene.getObjectByName("ship")
+        let engine = scene.getObjectByName("Engines")
+        let antenna = scene.getObjectByName("Antenna")
 
-            engine.material = ship.material
-            //camera.position.set(1000,4000,20)
+        let activeCamera = cameras[value]
 
-            console.log(renderer.info)
-        }
+        sceneCamera.position.set(...activeCamera.pos)
+            
     });
 }
-
-
-
-
-
-
-
 
 
 export function addHoverEventHighlight(camera, scene) {
