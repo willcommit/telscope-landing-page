@@ -6,7 +6,7 @@ import { createWater, waterPhysics, water } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { createShip, createLand, createDataCenter} from './models';
-import { addHoverEventHighlight, addClickEventOpenModal } from './events';
+import { addHoverEventHighlight, addClickEventOpenModal, listenEvents } from './events';
 import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -42,8 +42,10 @@ function init(bg) {
   createLand(scene)
   createDataCenter(scene)
   //addHoverEventHighlight(camera, scene)
-  addClickEventOpenModal(camera, scene)
+  //addClickEventOpenModal(camera, scene)
   addShoreCurve(scene)
+
+  listenEvents(camera, scene, renderer)
 
 
   const renderScene = new RenderPass(scene, camera);

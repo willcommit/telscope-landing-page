@@ -1,5 +1,5 @@
 <script>
-    import { showEngine } from "../stores.js";
+    import { showEngine, showModal } from "../stores.js";
     
     $: forwardFilled = true;
     $: backwardFilled = false;
@@ -21,7 +21,9 @@
         }
 
         if(i === headers[1].id) {
+            console.log("funkar")
             $showEngine = true
+            $showModal = true
         }
     }
 

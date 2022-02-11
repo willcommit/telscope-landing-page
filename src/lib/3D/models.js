@@ -29,7 +29,6 @@ export function createLand(scene) {
   const loader = new GLTFLoader();
 
   loader.load(landModel, function (gltf) {
-    console.log(gltf.scene)
     scene.add(gltf.scene);
 
   }, undefined, function (error) {
