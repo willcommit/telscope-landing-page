@@ -6,7 +6,7 @@ import { createWater, waterPhysics, water } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { createShip, createLand, createDataCenter} from './models';
-import { addHoverEventHighlight, addClickEventOpenModal, listenEvents } from './events';
+import { listenEvents } from './events';
 import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';

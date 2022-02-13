@@ -1,51 +1,50 @@
 <script>
-    import { showModal } from "../stores.js";
-    let show;
-    showModal.subscribe((value) => {
-        show = value;
-        console.log(show);
-    });
+    import { fly } from 'svelte/transition';
+
+    let columnStart = 5;
+    let columnEnd = 6;
+    let show = true;
+    export let content = "<h1>Default Text!</h1>"
+
+    function toggle() {
+		show = !show;
+	}
 </script>
 
 {#if show}
-    <div class="modal">
-        <div class="modal-content">
-            <span class="close" on:click={() => ($showModal = false)}
-                >&times;</span
-            >
+    <div class="modal" transition:fly="{{ x: 200, duration: 1000 }}">
+        <div class="modal-content" style="grid-column-start:{columnStart}; grid-column-end: {columnEnd}">
+            <span class="close" on:click={toggle}>&times;</span>
             <div class="modal-text">
-                <h1>KÖP TELSCOPE!</h1>
-                <p>
-                    Bästa loggboken
-                </p>
-                <br />
+                {@html content}
             </div>
         </div>
     </div>
+{:else}
+    <button class="open" on:click={toggle}></button>
+
 {/if}
 
 <style>
     .modal {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
         position: absolute;
         z-index: 100;
         position: fixed;
         z-index: 1;
-        padding-top: 80px;
         left: 0;
         top: 0;
         width: 100%;
-        height: 100%;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
+        height: 100vh;
     }
 
     .modal-content {
         background-color: white;
-        margin: auto;
         padding: 20px;
         border-radius: 18px;
         border: none;
-        width: 40%;
+        margin: 1rem;
     }
 
     .modal-text {
@@ -56,27 +55,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
-
-    .modal-text h1 {
-        font-size: 40px;
-        font-weight: 700;
-        margin: 0;
-    }
-
-    .modal-text p a {
-        margin: 0;
-        margin-bottom: 3rem;
-    }
-
-    .modal-text a {
-        outline-style: none;
-        color: #f5f5f5;
-    }
-
-    .disclaimer {
-        text-align: left;
-        font-size: 9px;
     }
 
     .close {
@@ -90,6 +68,20 @@
     .close:focus {
         color: #000;
         text-decoration: none;
+        cursor: pointer;
+    }
+
+    .open {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        z-index: 100;
+        border: none;
+        outline: none;
+        background: white;
+        border-radius: 50px;
+        height: 30px;
+        height: 30px;
         cursor: pointer;
     }
 </style>

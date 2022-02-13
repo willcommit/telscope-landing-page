@@ -1,6 +1,7 @@
 <script>
-  // import logo from './assets/svelte.png'
-  // import Counter from './lib/Counter.svelte'
+
+  import { activePresentation } from './stores';
+  import { presentations } from './lib/3D/presentation'
 
   import { onMount } from 'svelte'
   import { createCanvas } from "./lib/3D/canvas"
@@ -9,9 +10,14 @@
   import Navigation from "./lib/navigation.svelte"
 
   let bg;
+  let presentation;
 
   onMount(() => {
     createCanvas(bg)
+  })
+
+  activePresentation.subscribe((value) => {
+    presentation = presentations[value];
   })
 
 </script>
@@ -20,7 +26,10 @@
   <canvas bind:this={bg}></canvas>
   <Logo></Logo>
   <Navigation></Navigation>
-  <Modal></Modal>
+
+  <Modal content={presentation.name}></Modal>
+
+  
 </main>
 
 <style>

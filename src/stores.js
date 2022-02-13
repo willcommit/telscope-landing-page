@@ -1,7 +1,5 @@
-import { writable, readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-export const showModal = writable(false);
+//export const activeModal = writable(1);
 
-export const showEngine = writable(false);
-
-export const activeCamera = writable(1);
+export const activePresentation = writable(1);

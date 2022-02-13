@@ -1,21 +1,21 @@
 <script>
-    import { activeCamera, showModal } from "../stores.js";
-    import { cameras} from "./3D/camera";
+    import { activePresentation } from "../stores.js";
+    import { presentations } from "./3D/presentation";
 
-    $: forwardFilled = true;
-    $: backwardFilled = false;
+    let forwardFilled = true;
+    let backwardFilled = false;
     let i = 0;
 
     function forwardClick() {
-        if (i < cameras.length - 1) {
+        if (i < presentations.length - 1) {
             forwardFilled = true;
             backwardFilled = true;
             i += 1;
-        } else if (i === cameras.length-1) {
+        } else if (i === presentations.length - 1) {
             forwardFilled = false;
         }
 
-        $activeCamera = cameras[i].id 
+        $activePresentation = presentations[i].id;
     }
 
     function backwardClick() {
@@ -27,7 +27,7 @@
             backwardFilled = false;
         }
 
-        $activeCamera = cameras[i].id 
+        $activePresentation = presentations[i].id;
     }
 </script>
 
@@ -52,7 +52,7 @@
         </div>
     </button>
     <div class="label">
-        <div class="inner">{cameras[i].name}</div>
+        <div class="inner">{presentations[i].name}</div>
     </div>
     <button on:click={forwardClick} class="arrow">
         <div class="icon-forward" class:forwardFilled>
