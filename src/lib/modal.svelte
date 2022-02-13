@@ -1,5 +1,5 @@
 <script>
-    import { fly } from 'svelte/transition';
+    import { fly, fade } from 'svelte/transition';
 
     let columnStart = 5;
     let columnEnd = 6;
@@ -21,7 +21,7 @@
         </div>
     </div>
 {:else}
-    <button class="open" on:click={toggle}></button>
+    <button class="open" on:click={toggle} in:fly="{{ x: 200, duration: 2000 }}" out:fade>&#9432;</button>
 
 {/if}
 
@@ -72,13 +72,16 @@
     }
 
     .open {
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
         position: absolute;
         right: 1rem;
         top: 1rem;
         z-index: 100;
         border: none;
         outline: none;
-        background: white;
+        background: none;
         border-radius: 50px;
         height: 30px;
         height: 30px;
