@@ -28,6 +28,7 @@
 <style>
     .modal {
         display: grid;
+        overflow-x: hidden;
         grid-template-columns: auto auto auto auto auto;
         position: absolute;
         z-index: 100;

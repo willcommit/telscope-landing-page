@@ -12,8 +12,8 @@ export function listenEvents(sceneCamera, scene, renderer) {
     activePresentation.subscribe((value) => {
 
         let ship = scene.getObjectByName("ship")
-        let engine = scene.getObjectByName("Engines")
-        let antenna = scene.getObjectByName("Antenna")
+        let engine = scene.getObjectByName("engines")
+        let antenna = scene.getObjectByName("antenna")
 
         let activePresentation = presentations[value]
 

@@ -10,7 +10,7 @@ export function createShip(scene) {
 
   loader.load(shipModel, function (gltf) {
 
-    let ship = gltf.scene.children[2]
+    let ship = gltf.scene.getObjectByName("ship")
     // @ts-ignore
     ship.material.opacity = 0.2;
 
