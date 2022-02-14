@@ -7,7 +7,7 @@
   import Modal from "./lib/modal.svelte";
   import Logo from "./lib/logo.svelte";
   import Navigation from "./lib/navigation.svelte";
-  import Spinner from "./lib/spinner.svelte"
+  import Loader from "./lib/loader.svelte";
 
   let bg;
   let presentation;
@@ -19,18 +19,26 @@
   activePresentation.subscribe((value) => {
     presentation = presentations[value];
   });
-
 </script>
 
 <main>
   <canvas bind:this={bg} />
-  <Spinner></Spinner>
+  <Loader />
   <Logo />
   <Navigation />
   <Modal content={presentation.name} />
 </main>
 
 <style>
-  @media (min-width: 480px) {
+  :global(body) {
+    margin: 0;
+    overflow: hidden;
   }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
 </style>

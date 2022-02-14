@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
 
-//export const activeModal = writable(1);
+export const loaded = writable(false);
 
 export const activePresentation = writable(0);

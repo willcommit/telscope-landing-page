@@ -22,7 +22,6 @@
     </div>
 {:else}
     <button class="open" on:click={toggle} in:fly="{{ x: 200, duration: 2000 }}" out:fade>&#9432;</button>
-
 {/if}
 
 <style>
@@ -74,7 +73,7 @@
 
     .open {
         color: white;
-        font-weight: bold;
+        font-weight: normal;
         font-size: 30px;
         position: absolute;
         right: 1rem;
@@ -83,9 +82,6 @@
         border: none;
         outline: none;
         background: none;
-        border-radius: 50px;
-        height: 30px;
-        height: 30px;
         cursor: pointer;
     }
 </style>

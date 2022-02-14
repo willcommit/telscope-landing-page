@@ -1,5 +1,3 @@
-import './canvas.css'
-
 import * as THREE from 'three';
 
 import { createWater, waterPhysics, water } from './water';
@@ -11,6 +9,8 @@ import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+import {loaded} from '../../stores'
 
 let scene, renderer, composer;
 
@@ -60,6 +60,7 @@ function init(bg) {
   composer.addPass(bloomPass);
 
   window.addEventListener('resize', onWindowResize);
+
 }
 
 function onWindowResize() {

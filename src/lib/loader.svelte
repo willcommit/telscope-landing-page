@@ -1,11 +1,14 @@
 <script>
     import { onDestroy, onMount } from "svelte";
-
+    import { loaded } from '../stores'
     let show = true;
 
-    onMount(() =>{
-        setTimeout(() => (show = false), 10000);
+    loaded.subscribe((loaded) => {
+        if (loaded === true) {
+            show = false;
+        }
     })
+
 </script>
 
 {#if show}
@@ -24,5 +27,6 @@
         height: 100%;
         z-index: 9999;
         background: url("../assets/logo.png") center no-repeat rgb(0, 0, 0);
+        background-size: 200px;
     }
 </style>

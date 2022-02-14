@@ -1,16 +1,16 @@
 <script>
-    import logo from '../assets/logo.png'
-
+    import logo from "../assets/logo.png";
 </script>
 
-<img src="{logo}" alt="Telscope logo">
-
+<a href="https://telko.no/telscope/" target="_blank">
+    <img src={logo} alt="Telscope logo" />
+</a>
 
 <style>
     img {
         position: absolute;
         z-index: 100;
         margin: 1rem;
-        width: 250px;
+        width: 200px;
     }
 </style>
