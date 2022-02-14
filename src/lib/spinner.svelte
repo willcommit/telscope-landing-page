@@ -4,7 +4,7 @@
     let show = true;
 
     onMount(() =>{
-        setTimeout(() => (show = false), 3000);
+        setTimeout(() => (show = false), 10000);
     })
 </script>
 
