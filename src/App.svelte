@@ -26,7 +26,7 @@
   <Loader />
   <Logo />
   <Navigation />
-  <Modal content={presentation.name} />
+  <Modal content={presentation.slide} />
 </main>
 
 <style>

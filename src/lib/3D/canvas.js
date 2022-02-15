@@ -33,7 +33,6 @@ function init(bg) {
 
   createWater(scene);
   createSky(scene)
-  listenEvents(camera, scene)
   createOrbitCamera(renderer)
 
   loadModels()
@@ -52,6 +51,9 @@ function init(bg) {
   composer.addPass(bloomPass);
 
   window.addEventListener('resize', onWindowResize);
+
+  //listenEvents(camera, scene)
+
 }
 
 function onWindowResize() {

@@ -1,27 +1,38 @@
 import { activePresentation } from '../../stores.js';
 import { presentations } from './presentation'
+import { highlightMaterial } from './models.js';
 
 import { loaded } from '../../stores'
 
+let previousModel
 
 export function listenEvents(sceneCamera, scene) {   
 
     activePresentation.subscribe((value) => {
         
-        let ship = scene.children[1]
-        let engine = scene.getObjectByName("engines")
-
         let activePresentation = presentations[value]
+        let ship = scene.getObjectByName("ship")
+        let activeModel;
+        
+        ship.material.opacity = activePresentation.modelOpacity;
+
+        if(previousModel) {
+            previousModel.material = ship.material
+        }
+
+        if (activePresentation.activeModel) {        
+            activeModel = scene.getObjectByName(activePresentation.activeModel)
+            console.log(activeModel)
+            previousModel = scene.getObjectByName(activePresentation.activeModel)
+            activeModel.material = highlightMaterial;
+        }
+
         sceneCamera.position.set(...activePresentation.cameraPos)
         sceneCamera.rotation.order = 'YXZ'
         
-        console.log(ship)
-        //ship.material.opacity = activePresentation.modelOpacity;
-
         sceneCamera.rotation.y = activePresentation.rotY * Math.PI / 180
         sceneCamera.rotation.x = activePresentation.rotX * Math.PI / 180
-        sceneCamera.rotation.z = activePresentation.rotZ * Math.PI / 180
-        
+        sceneCamera.rotation.z = activePresentation.rotZ * Math.PI / 180      
     });
 }
 

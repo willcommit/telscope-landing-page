@@ -52,7 +52,7 @@
         </div>
     </button>
     <div class="label">
-        <div class="inner">{presentations[i].name}</div>
+        <div class="inner">{presentations[i].slide}</div>
     </div>
     <button on:click={forwardClick} class="arrow">
         <div class="icon-forward" class:forwardFilled>
