@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { createWater, waterPhysics, water } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
-import { createShip, createLand, createDataCenter} from './models';
+import { loadModels } from './models';
 import { listenEvents } from './events';
 import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -12,7 +12,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 
 import {loaded} from '../../stores'
 
-let scene, renderer, composer;
+export let scene, renderer, composer;
 
 const params = {
   exposure: 0.3,
@@ -33,20 +33,12 @@ function init(bg) {
 
   createWater(scene);
   createSky(scene)
+  listenEvents(camera, scene)
   createOrbitCamera(renderer)
 
-  // const helper = new THREE.CameraHelper( camera );
-  // scene.add( helper );
+  loadModels()
 
-  createShip(scene)
-  createLand(scene)
-  createDataCenter(scene)
-  //addHoverEventHighlight(camera, scene)
-  //addClickEventOpenModal(camera, scene)
   addShoreCurve(scene)
-
-  listenEvents(camera, scene, renderer)
-
 
   const renderScene = new RenderPass(scene, camera);
 
@@ -60,7 +52,6 @@ function init(bg) {
   composer.addPass(bloomPass);
 
   window.addEventListener('resize', onWindowResize);
-
 }
 
 function onWindowResize() {
@@ -73,7 +64,7 @@ function onWindowResize() {
 
 function render() {
 
-  waterPhysics();
+  //waterPhysics();
 
   composer.render();
 }

@@ -1,12 +1,11 @@
 import { PerspectiveCamera } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { presentations } from './presentation';
 
 export let camera
 let controls;
 
 camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 20000);
-camera.position.set(100, 40, 10);
-camera.lookAt(0, 15, 0)
 
 export function createOrbitCamera (renderer) {
     controls = new OrbitControls(camera, renderer.domElement);

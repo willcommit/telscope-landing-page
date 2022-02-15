@@ -3,9 +3,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import shipModel from '../../assets/ship.gltf?url';
 import landModel from '../../assets/land.gltf?url';
 import dataCenterdModel from '../../assets/dc.gltf?url';
+import { scene } from './canvas';
 
 import { loaded } from '../../stores';
-
 
 const manager = new LoadingManager();
 
@@ -15,20 +15,11 @@ manager.onLoad = function () {
 
 };
 
-
 const loader = new GLTFLoader(manager);
 
-
-export function createShip(scene) {
+function createShip() {
 
   loader.load(shipModel, function (gltf) {
-
-    let ship = gltf.scene.getObjectByName("ship")
-    // @ts-ignore
-    ship.material.opacity = 0.2;
-
-    let engine = gltf.scene.children[1]
-    //engine.material = ship.material
 
     scene.add(gltf.scene);
 
@@ -39,7 +30,7 @@ export function createShip(scene) {
 }
 
 
-export function createLand(scene) {
+function createLand() {
 
   loader.load(landModel, function (gltf) {
     scene.add(gltf.scene);
@@ -50,7 +41,7 @@ export function createLand(scene) {
   });
 }
 
-export function createDataCenter(scene) {
+function createDataCenter() {
 
   loader.load(dataCenterdModel, function (gltf) {
 
@@ -60,4 +51,11 @@ export function createDataCenter(scene) {
 
     console.error(error);
   });
+}
+
+export function loadModels() {
+  createShip()
+  createLand()
+  createDataCenter()
+
 }

@@ -1,23 +1,27 @@
-import { Raycaster, Vector2 } from "three";
 import { activePresentation } from '../../stores.js';
 import { presentations } from './presentation'
 
-const clickMouse = new Vector2();
-const raycaster = new Raycaster();
-const pointer = new Vector2();
-let INTERSECTED;
+import { loaded } from '../../stores'
 
-export function listenEvents(sceneCamera, scene, renderer) {
-    
+
+export function listenEvents(sceneCamera, scene) {   
+
     activePresentation.subscribe((value) => {
-
-        let ship = scene.getObjectByName("ship")
+        
+        let ship = scene.children[1]
         let engine = scene.getObjectByName("engines")
-        let antenna = scene.getObjectByName("antenna")
 
         let activePresentation = presentations[value]
+        sceneCamera.position.set(...activePresentation.cameraPos)
+        sceneCamera.rotation.order = 'YXZ'
+        
+        console.log(ship)
+        //ship.material.opacity = activePresentation.modelOpacity;
 
-        sceneCamera.position.set(...activePresentation.cameraPos)            
+        sceneCamera.rotation.y = activePresentation.rotY * Math.PI / 180
+        sceneCamera.rotation.x = activePresentation.rotX * Math.PI / 180
+        sceneCamera.rotation.z = activePresentation.rotZ * Math.PI / 180
+        
     });
 }
 
