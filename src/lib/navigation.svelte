@@ -11,7 +11,10 @@
             forwardFilled = true;
             backwardFilled = true;
             i += 1;
-        } else if (i === presentations.length - 1) {
+        }
+        
+        if (i === presentations.length - 1) {
+            console.log("True")
             forwardFilled = false;
         }
 

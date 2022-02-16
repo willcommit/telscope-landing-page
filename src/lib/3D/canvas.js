@@ -1,16 +1,13 @@
-import * as THREE from 'three';
+import { ACESFilmicToneMapping, Scene, Vector2, WebGLRenderer } from 'three';
 
 import { createWater, waterPhysics, water } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { loadModels } from './models';
-import { listenEvents } from './events';
 import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-
-import {loaded} from '../../stores'
 
 export let scene, renderer, composer;
 
@@ -23,13 +20,13 @@ const params = {
 
 function init(bg) {
 
-  renderer = new THREE.WebGLRenderer({ canvas: bg });
+  renderer = new WebGLRenderer({ canvas: bg });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMapping = ACESFilmicToneMapping;
   //container.appendChild(renderer.domElement);
 
-  scene = new THREE.Scene();
+  scene = new Scene();
 
   createWater(scene);
   createSky(scene)
@@ -41,7 +38,7 @@ function init(bg) {
 
   const renderScene = new RenderPass(scene, camera);
 
-  const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+  const bloomPass = new UnrealBloomPass(new Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
   bloomPass.threshold = params.bloomThreshold;
   bloomPass.strength = params.bloomStrength;
   bloomPass.radius = params.bloomRadius;
@@ -51,9 +48,6 @@ function init(bg) {
   composer.addPass(bloomPass);
 
   window.addEventListener('resize', onWindowResize);
-
-  //listenEvents(camera, scene)
-
 }
 
 function onWindowResize() {
@@ -66,7 +60,7 @@ function onWindowResize() {
 
 function render() {
 
-  //waterPhysics();
+  waterPhysics();
 
   composer.render();
 }

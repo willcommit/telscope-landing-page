@@ -2,8 +2,6 @@ import { activePresentation } from '../../stores.js';
 import { presentations } from './presentation'
 import { highlightMaterial } from './models.js';
 
-import { loaded } from '../../stores'
-
 let previousModel
 
 export function listenEvents(sceneCamera, scene) {   
@@ -22,7 +20,7 @@ export function listenEvents(sceneCamera, scene) {
 
         if (activePresentation.activeModel) {        
             activeModel = scene.getObjectByName(activePresentation.activeModel)
-            console.log(activeModel)
+            // console.log(activeModel)
             previousModel = scene.getObjectByName(activePresentation.activeModel)
             activeModel.material = highlightMaterial;
         }
