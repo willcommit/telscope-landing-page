@@ -1,19 +1,17 @@
 <script>
-    import { fly, fade } from 'svelte/transition';
+    import { fly, fade } from "svelte/transition";
 
-    let columnStart = 5;
-    let columnEnd = 6;
     let show = true;
-    export let content = "<h1>Default Text!</h1>"
+    export let content = "<h1>Default Text!</h1>";
 
     function toggle() {
-		show = !show;
-	}
+        show = !show;
+    }
 </script>
 
 {#if show}
-    <div class="modal" transition:fly="{{ x: 200, duration: 1000 }}">
-        <div class="modal-content" style="grid-column-start:{columnStart}; grid-column-end: {columnEnd}">
+    <div class="modal" transition:fly={{ x: 200, duration: 1000 }}>
+        <div class="modal-content">
             <span class="close" on:click={toggle}>&times;</span>
             <div class="modal-text">
                 {@html content}
@@ -21,7 +19,12 @@
         </div>
     </div>
 {:else}
-    <button class="open" on:click={toggle} in:fly="{{ x: 200, duration: 2000 }}" out:fade>&#9432;</button>
+    <button
+        class="open"
+        on:click={toggle}
+        in:fly={{ x: 200, duration: 2000 }}
+        out:fade>&#9432;</button
+    >
 {/if}
 
 <style>
@@ -29,6 +32,7 @@
         display: grid;
         overflow-x: hidden;
         grid-template-columns: auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto;
         position: absolute;
         z-index: 100;
         position: fixed;
@@ -40,6 +44,10 @@
     }
 
     .modal-content {
+        grid-column-start: 5;
+        grid-column-end: 6;
+        grid-row-start: 1;
+        grid-row-end: 5;
         background-color: white;
         padding: 20px;
         border-radius: 18px;
@@ -83,5 +91,15 @@
         outline: none;
         background: none;
         cursor: pointer;
+    }
+
+    @media (max-width: 1000px) {
+        .modal-content {
+            grid-column-start: 1;
+            grid-column-end: 6;
+            grid-row-start: 1;
+            grid-row-end: 2;
+            margin-top: 3em;
+        }
     }
 </style>
