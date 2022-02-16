@@ -63,8 +63,9 @@ function createDataCenter() {
 
 function createMaterials(bpMaterial) {
   highlightMaterial = new MeshStandardMaterial(bpMaterial);
-  highlightMaterial.name = "highlight" 
-  highlightMaterial.emissive.setHex(0xed1330)
+  highlightMaterial.name = "highlight"
+  highlightMaterial.emissive.setHex(0xcc0000)
+  highlightMaterial.opacity = 0.4
 }
 
 export function loadModels() {
