@@ -4,7 +4,6 @@ import shipModel from '../../assets/ship.gltf?url';
 import landModel from '../../assets/land.gltf?url';
 import dataCenterdModel from '../../assets/datacenter.gltf?url';
 import { scene } from './canvas';
-import { camera } from './camera';
 import { listenEvents } from './events';
 
 import { loaded } from '../../stores';
@@ -16,7 +15,7 @@ export let highlightMaterial;
 manager.onLoad = function () {
 
   loaded.update(n => n = true)
-  listenEvents(camera, scene)
+  listenEvents(scene)
 
 };
 

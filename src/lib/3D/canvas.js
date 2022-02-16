@@ -1,6 +1,6 @@
 import { ACESFilmicToneMapping, Scene, Vector2, WebGLRenderer } from 'three';
 
-import { createWater, waterPhysics, water } from './water';
+import { createWater, waterPhysics } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { loadModels } from './models';
@@ -8,6 +8,8 @@ import { addShoreCurve } from './curves';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import TWEEN from '@tweenjs/tween.js'
+
 
 export let scene, renderer, composer;
 
@@ -66,6 +68,7 @@ function render() {
 }
 
 function animate() {
+  TWEEN.update()
   requestAnimationFrame(animate);
   render();
 }

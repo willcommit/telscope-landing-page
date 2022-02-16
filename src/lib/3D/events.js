@@ -1,31 +1,34 @@
 import { activePresentation } from '../../stores.js';
 import { presentations } from './presentation'
 import { highlightMaterial } from './models.js';
+import { camera } from './camera.js';
+import TWEEN from '@tweenjs/tween.js'
+import { Vector3 } from 'three';
 
 let previousModel
 let signal;
+let previousPresentation;
 
-export function listenEvents(sceneCamera, scene) {   
+export function listenEvents(scene) {
 
     activePresentation.subscribe((value) => {
-        
+
         let activePresentation = presentations[value]
         let ship = scene.getObjectByName("ship")
         let activeModel;
 
-        if(signal !== undefined) {
-            console.log("hit")
+        if (signal !== undefined) {
             signal.visible = false;
         }
-        
+
         ship.material.opacity = activePresentation.modelOpacity;
 
 
-        if(previousModel) {
+        if (previousModel) {
             previousModel.material = ship.material
         }
 
-        if (activePresentation.activeModel) {        
+        if (activePresentation.activeModel) {
             activeModel = scene.getObjectByName(activePresentation.activeModel)
             // console.log(activeModel)
             previousModel = scene.getObjectByName(activePresentation.activeModel)
@@ -35,17 +38,31 @@ export function listenEvents(sceneCamera, scene) {
         if (activePresentation.showSignal) {
             signal = scene.getObjectByName("signal")
             signal.visible = true;
-        } 
-        
-        sceneCamera.position.set(...activePresentation.cameraPos)
-        sceneCamera.rotation.order = 'YXZ'
-        
-        sceneCamera.rotation.y = activePresentation.rotY * Math.PI / 180
-        sceneCamera.rotation.x = activePresentation.rotX * Math.PI / 180
-        sceneCamera.rotation.z = activePresentation.rotZ * Math.PI / 180      
+        }
+
+        if (previousPresentation !== undefined) {
+            console.log("here")
+            const tweenCamera = new TWEEN.Tween({ x: 10, y: 10, z: 10, lookAtX: 0, lookAtY: 0, lookAtZ: 0 })
+                .to({ x: 20, y: 20, z: 20, lookAtX: 0, lookAtY: 0, lookAtZ: 0 }, 7000)
+
+            tweenCamera.onUpdate(updateCamera)
+        } else {
+            camera.position.set(...activePresentation.cameraPos)
+            camera.rotation.order = 'YXZ'
+            camera.rotation.y = activePresentation.rotY * Math.PI / 180
+            camera.rotation.x = activePresentation.rotX * Math.PI / 180
+            camera.rotation.z = activePresentation.rotZ * Math.PI / 180
+        }
+
+        previousPresentation = activePresentation
     });
 }
 
+
+const updateCamera = function (object) {
+    camera.position.set(object.x, object.y, object.z);
+    camera.lookAt(new Vector3(object.lookAtX, object.lookAtY, object.lookAtZ))
+}
 
 // export function addHoverEventHighlight(camera, scene) {
 //     window.addEventListener('mousemove', event => {
