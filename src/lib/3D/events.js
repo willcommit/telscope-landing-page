@@ -5,23 +5,27 @@ import { camera } from './camera.js';
 import TWEEN from '@tweenjs/tween.js'
 import { Vector3 } from 'three';
 
-let previousModel
+let previousModel   
 let signal;
-let previousPresentation;
+let previousCamera;
 
 export function listenEvents(scene) {
 
     activePresentation.subscribe((value) => {
 
         let activePresentation = presentations[value]
+        let activeCamera = activePresentation.sceneCamera
         let ship = scene.getObjectByName("ship")
         let activeModel;
+
+        console.log(presentations)
+
 
         if (signal !== undefined) {
             signal.visible = false;
         }
 
-        ship.material.opacity = activePresentation.modelOpacity;
+        ship.material.opacity = 0.1;
 
 
         if (previousModel) {
@@ -40,21 +44,17 @@ export function listenEvents(scene) {
             signal.visible = true;
         }
 
-        if (previousPresentation !== undefined) {
-            console.log("here")
-            const tweenCamera = new TWEEN.Tween({ x: 10, y: 10, z: 10, lookAtX: 0, lookAtY: 0, lookAtZ: 0 })
-                .to({ x: 20, y: 20, z: 20, lookAtX: 0, lookAtY: 0, lookAtZ: 0 }, 7000)
+        if (previousCamera !== undefined) {
+            const tweenCamera = new TWEEN.Tween(previousCamera)
+                .to(activeCamera, 4000)
 
-            tweenCamera.onUpdate(updateCamera)
+            tweenCamera.onUpdate(updateCamera).start()
         } else {
-            camera.position.set(...activePresentation.cameraPos)
-            camera.rotation.order = 'YXZ'
-            camera.rotation.y = activePresentation.rotY * Math.PI / 180
-            camera.rotation.x = activePresentation.rotX * Math.PI / 180
-            camera.rotation.z = activePresentation.rotZ * Math.PI / 180
+            camera.position.set(activeCamera.x, activeCamera.y, activeCamera.z)
+            camera.lookAt(new Vector3(activeCamera.lookAtX, activeCamera.lookAtY, activeCamera.lookAtZ))
         }
 
-        previousPresentation = activePresentation
+        previousCamera = activeCamera
     });
 }
 

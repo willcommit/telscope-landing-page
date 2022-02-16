@@ -25,7 +25,9 @@
             i -= 1;
             forwardFilled = true;
             backwardFilled = true;
-        } else if (i === 0) {
+        }
+        
+        if (i === 0) {
             backwardFilled = false;
         }
 
