@@ -15,7 +15,7 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "04.Skys05Plane.005",
+            "name" : "datacenter",
             "rotation" : [
                 0,
                 -0.7121049761772156,
@@ -43,7 +43,7 @@
                 0.4513777793001239,
                 0.6000000238418579
             ],
-            "name" : "Material.001",
+            "name" : "shipmat",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0,

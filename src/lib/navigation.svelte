@@ -14,7 +14,6 @@
         }
         
         if (i === presentations.length - 1) {
-            console.log("True")
             forwardFilled = false;
         }
 

@@ -3,6 +3,7 @@ import { presentations } from './presentation'
 import { highlightMaterial } from './models.js';
 
 let previousModel
+let signal;
 
 export function listenEvents(sceneCamera, scene) {   
 
@@ -11,8 +12,14 @@ export function listenEvents(sceneCamera, scene) {
         let activePresentation = presentations[value]
         let ship = scene.getObjectByName("ship")
         let activeModel;
+
+        if(signal !== undefined) {
+            console.log("hit")
+            signal.visible = false;
+        }
         
         ship.material.opacity = activePresentation.modelOpacity;
+
 
         if(previousModel) {
             previousModel.material = ship.material
@@ -25,6 +32,11 @@ export function listenEvents(sceneCamera, scene) {
             activeModel.material = highlightMaterial;
         }
 
+        if (activePresentation.showSignal) {
+            signal = scene.getObjectByName("signal")
+            signal.visible = true;
+        } 
+        
         sceneCamera.position.set(...activePresentation.cameraPos)
         sceneCamera.rotation.order = 'YXZ'
         

@@ -2,7 +2,7 @@ import { LoadingManager } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import shipModel from '../../assets/ship.gltf?url';
 import landModel from '../../assets/land.gltf?url';
-import dataCenterdModel from '../../assets/dc.gltf?url';
+import dataCenterdModel from '../../assets/datacenter.gltf?url';
 import { scene } from './canvas';
 import { camera } from './camera';
 import { listenEvents } from './events';
