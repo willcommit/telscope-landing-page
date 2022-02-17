@@ -1,6 +1,5 @@
 import { PerspectiveCamera } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { presentations } from './presentation';
 
 export let camera
 let controls;

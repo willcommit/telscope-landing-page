@@ -26,7 +26,6 @@ function init(bg) {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = ACESFilmicToneMapping;
-  //container.appendChild(renderer.domElement);
 
   scene = new Scene();
 

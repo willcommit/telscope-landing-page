@@ -7,19 +7,22 @@ import { Vector3 } from 'three';
 
 let previousModel   
 let signal;
-let previousCamera = { x: 80 , y:30, z:-30, lookAtX: 10, lookAtY: 0, lookAtZ: 0 };
+let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
 
 export function listenEvents(scene) {
 
     activePresentation.subscribe((value) => {
 
+        console.log(presentations[0])
+
+        console.log(previousCamera)
+        
         let activePresentation = presentations[value]
         let activeCamera = activePresentation.sceneCamera
         let ship = scene.getObjectByName("ship")
         let activeModel;
 
-        console.log(presentations)
-
+        console.log(previousCamera)
 
         if (signal !== undefined) {
             signal.visible = false;
@@ -34,7 +37,6 @@ export function listenEvents(scene) {
 
         if (activePresentation.activeModel) {
             activeModel = scene.getObjectByName(activePresentation.activeModel)
-            // console.log(activeModel)
             previousModel = scene.getObjectByName(activePresentation.activeModel)
             activeModel.material = highlightMaterial;
         }
@@ -49,15 +51,11 @@ export function listenEvents(scene) {
                 .to(activeCamera, 4000)
 
             tweenCamera.onUpdate(updateCamera).start()
+
         } else {
             camera.position.set(activeCamera.x, activeCamera.y, activeCamera.z)
             camera.lookAt(new Vector3(activeCamera.lookAtX, activeCamera.lookAtY, activeCamera.lookAtZ))
         }
-
-        // camera.position.set(activeCamera.x, activeCamera.y, activeCamera.z)
-        // camera.lookAt(new Vector3(activeCamera.lookAtX, activeCamera.lookAtY, activeCamera.lookAtZ))
-
-        //previousCamera = Object.assign(activeCamera)
     });
 }
 
