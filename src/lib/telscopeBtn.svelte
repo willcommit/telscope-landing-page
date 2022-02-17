@@ -15,9 +15,10 @@
             <iframe title="telscope app" src="https://telko.no/telscope/" frameborder="0"></iframe>    
         </div>
     </div>
-{:else}
-    <button class="open" on:click={toggle}></button>
+
 {/if}
+
+<button class="open" on:click={toggle}></button>
 
 <style>
     .modal {
