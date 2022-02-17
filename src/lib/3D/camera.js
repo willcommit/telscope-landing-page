@@ -15,7 +15,3 @@ export function createOrbitCamera (renderer) {
     controls.enablePan = false;
     controls.update();
 }
-
-export function moveCamera () {
-
-}

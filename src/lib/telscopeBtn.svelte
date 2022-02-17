@@ -11,8 +11,7 @@
 {#if show}
     <div class="modal" transition:fly={{ x: -200, duration: 1000 }}>
         <div class="modal-content">
-            <span class="close" on:click={toggle}>&times;</span>
-            <iframe title="telscope app" src="https://telko.no/telscope/" frameborder="0"></iframe>    
+            <iframe title="telscope app" src="https://demo.telscope.no/auth/login-page" frameborder="0"></iframe>    
         </div>
     </div>
 
@@ -48,22 +47,6 @@
         border-radius: 18px;
         border: none;
         margin: 6rem;
-    }
-
-    .close {
-        position: absolute;
-        z-index: 90;
-        color: white;
-        float: right;
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: #29D9EF;
-        text-decoration: none;
-        cursor: pointer;
     }
 
     .open {
