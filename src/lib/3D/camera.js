@@ -12,6 +12,7 @@ export function createOrbitCamera (renderer) {
     controls.target.set(0, 10, 0);
     controls.minDistance = 40.0;
     controls.maxDistance = 200.0;
+    controls.enablePan = false;
     controls.update();
 }
 
