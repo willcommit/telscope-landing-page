@@ -1,8 +1,7 @@
 <script>
     import { fly, fade } from "svelte/transition";
 
-    let show = true;
-    export let content = "<h1>Default Text!</h1>";
+    let show = false;
 
     function toggle() {
         show = !show;
@@ -10,31 +9,25 @@
 </script>
 
 {#if show}
-    <div class="modal" transition:fly={{ x: 200, duration: 1000 }}>
+    <div class="modal" transition:fly={{ x: -200, duration: 1000 }}>
         <div class="modal-content">
             <span class="close" on:click={toggle}>&times;</span>
-            <div class="modal-text">
-                {@html content}
-            </div>
+            <iframe title="telscope app" src="https://telko.no/telscope/" frameborder="0"></iframe>    
         </div>
     </div>
 {:else}
-    <button
-        class="open"
-        on:click={toggle}
-        in:fly={{ x: 200, duration: 2000 }}
-        out:fade>&#9432;
-    </button>
+    <button class="open" on:click={toggle}></button>
 {/if}
 
 <style>
     .modal {
+        position: absolute;
         display: grid;
         overflow-x: hidden;
         grid-template-columns: auto auto auto auto auto;
         grid-template-rows: auto auto auto auto;
         position: absolute;
-        z-index: 40;
+        z-index: 80;
         position: fixed;
         z-index: 1;
         left: 0;
@@ -44,7 +37,8 @@
     }
 
     .modal-content {
-        grid-column-start: 5;
+        display: flex;
+        grid-column-start: 1;
         grid-column-end: 6;
         grid-row-start: 1;
         grid-row-end: 5;
@@ -52,23 +46,15 @@
         padding: 20px;
         border-radius: 18px;
         border: none;
-        margin: 1rem;
-    }
-
-    .modal-text {
-        text-align: center;
-        font-family: "Cinzel", serif;
-        color: black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        margin: 6rem;
     }
 
     .close {
-        color: black;
+        position: absolute;
+        z-index: 90;
+        color: white;
         float: right;
-        font-size: 28px;
+        font-size: 40px;
         font-weight: bold;
     }
 
@@ -80,17 +66,20 @@
     }
 
     .open {
+        width: 40px;
+        height: 40px;
         color: white;
         font-weight: normal;
         font-size: 30px;
         position: absolute;
-        right: 1rem;
-        top: 1rem;
+        left: 1rem;
+        bottom: 5rem;
         z-index: 100;
         border: none;
         outline: none;
         background: none;
         cursor: pointer;
+        background: url("../assets/app.svg") center no-repeat transparent;
         transition: all .2s ease-in-out;
     }
 
@@ -100,13 +89,15 @@
         transform: scale(1.1);
     }
 
+    iframe {
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
     @media (max-width: 1000px) {
-        .modal-content {
-            grid-column-start: 1;
-            grid-column-end: 6;
-            grid-row-start: 1;
-            grid-row-end: 2;
-            margin-top: 3em;
+        .open {
+            display: none;
         }
     }
 </style>

@@ -8,6 +8,8 @@
   import Logo from "./lib/logo.svelte";
   import Navigation from "./lib/navigation.svelte";
   import Loader from "./lib/loader.svelte";
+  import FullscreenBtn from "./lib/fullscreenBtn.svelte"
+  import TelscopeBtn from "./lib/telscopeBtn.svelte"
 
   let bg;
   let presentation;
@@ -25,8 +27,10 @@
   <canvas bind:this={bg} />
   <Loader />
   <Logo />
+  <TelscopeBtn/>
   <Navigation />
   <Modal content={presentation.slide} />
+  <FullscreenBtn/>
 </main>
 
 <style>
