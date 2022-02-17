@@ -9,7 +9,7 @@
 <style>
     img {
         position: absolute;
-        z-index: 100;
+        z-index: 20;
         margin: 1rem;
         width: 200px;
     }

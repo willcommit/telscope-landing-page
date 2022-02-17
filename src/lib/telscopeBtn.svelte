@@ -10,42 +10,29 @@
 
 {#if show}
     <div class="modal" transition:fly={{ x: -200, duration: 1000 }}>
-        <div class="modal-content">
-            <iframe title="telscope app" src="https://demo.telscope.no/auth/login-page" frameborder="0"></iframe>    
-        </div>
+        <iframe
+            title="telscope app"
+            width="1920"
+            height="1080"
+            src="https://demo.telscope.no/auth/login-page"
+            frameborder="0"
+        />
     </div>
 {/if}
 
-<button class="open" on:click={toggle}></button>
+<button class="open" on:click={toggle} />
 
 <style>
     .modal {
         position: absolute;
-        display: grid;
-        overflow-x: hidden;
-        grid-template-columns: auto auto auto auto auto;
-        grid-template-rows: auto auto auto auto;
-        position: absolute;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
         z-index: 80;
-        position: fixed;
-        z-index: 1;
         left: 0;
         top: 0;
         width: 100%;
         height: 100vh;
-    }
-
-    .modal-content {
-        display: flex;
-        grid-column-start: 1;
-        grid-column-end: 6;
-        grid-row-start: 1;
-        grid-row-end: 5;
-        background-color: white;
-        padding: 20px;
-        border-radius: 18px;
-        border: none;
-        margin: 6rem;
     }
 
     .open {
@@ -63,22 +50,22 @@
         background: none;
         cursor: pointer;
         background: url("../assets/app.svg") center no-repeat transparent;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     .open:hover,
     .open:focus {
-        color: #29D9EF;
+        color: #29d9ef;
         transform: scale(1.1);
     }
 
     iframe {
-        align-items: center;
-        width: 100%;
-        height: 100%;
+        width: 1920px;
+        height: 1080px;
+        transform: scale(0.5);
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1080px) {
         .open {
             display: none;
         }
