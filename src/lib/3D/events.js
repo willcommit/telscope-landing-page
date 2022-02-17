@@ -12,10 +12,6 @@ let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
 export function listenEvents(scene) {
 
     activePresentation.subscribe((value) => {
-
-        console.log(presentations[0])
-
-        console.log(previousCamera)
         
         let activePresentation = presentations[value]
         let activeCamera = activePresentation.sceneCamera
