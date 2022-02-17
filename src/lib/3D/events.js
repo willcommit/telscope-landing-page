@@ -7,7 +7,7 @@ import { Vector3 } from 'three';
 
 let previousModel   
 let signal;
-let previousCamera;
+let previousCamera = { x: 80 , y:30, z:-30, lookAtX: 10, lookAtY: 0, lookAtZ: 0 };
 
 export function listenEvents(scene) {
 
@@ -54,7 +54,10 @@ export function listenEvents(scene) {
             camera.lookAt(new Vector3(activeCamera.lookAtX, activeCamera.lookAtY, activeCamera.lookAtZ))
         }
 
-        previousCamera = activeCamera
+        // camera.position.set(activeCamera.x, activeCamera.y, activeCamera.z)
+        // camera.lookAt(new Vector3(activeCamera.lookAtX, activeCamera.lookAtY, activeCamera.lookAtZ))
+
+        //previousCamera = Object.assign(activeCamera)
     });
 }
 
