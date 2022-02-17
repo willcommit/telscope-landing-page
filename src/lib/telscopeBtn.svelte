@@ -14,7 +14,6 @@
             <iframe title="telscope app" src="https://demo.telscope.no/auth/login-page" frameborder="0"></iframe>    
         </div>
     </div>
-
 {/if}
 
 <button class="open" on:click={toggle}></button>

@@ -23,7 +23,8 @@
         class="open"
         on:click={toggle}
         in:fly={{ x: 200, duration: 2000 }}
-        out:fade>&#9432;
+        out:fade
+        >&#9432;
     </button>
 {/if}
 
@@ -48,7 +49,8 @@
         grid-column-end: 6;
         grid-row-start: 1;
         grid-row-end: 5;
-        background-color: white;
+        background-color: hsla(0, 0%, 97%, 0.25);
+        backdrop-filter: blur(5px);
         padding: 20px;
         border-radius: 18px;
         border: none;
@@ -57,8 +59,8 @@
 
     .modal-text {
         text-align: center;
-        font-family: "Cinzel", serif;
-        color: black;
+        font-weight: 100;
+        color: white;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -66,15 +68,17 @@
     }
 
     .close {
-        color: black;
-        float: right;
+        position: absolute;
+        color: white;
+        font-weight: 100;
+        top: 0.5rem;
+        right: 1.2rem;
         font-size: 28px;
-        font-weight: bold;
     }
 
     .close:hover,
     .close:focus {
-        color: #29D9EF;
+        color: #29d9ef;
         text-decoration: none;
         cursor: pointer;
     }
@@ -91,12 +95,12 @@
         outline: none;
         background: none;
         cursor: pointer;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     .open:hover,
     .open:focus {
-        color: #29D9EF;
+        color: #29d9ef;
         transform: scale(1.1);
     }
 

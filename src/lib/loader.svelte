@@ -1,5 +1,4 @@
 <script>
-    import { onDestroy, onMount } from "svelte";
     import { loaded } from '../stores'
     let show = true;
 

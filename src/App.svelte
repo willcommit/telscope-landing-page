@@ -35,6 +35,7 @@
 
 <style>
   :global(body) {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     overflow: hidden;
   }
@@ -44,5 +45,4 @@
     top: 0;
     left: 0;
   }
-
 </style>

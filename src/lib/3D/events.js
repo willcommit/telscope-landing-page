@@ -18,8 +18,6 @@ export function listenEvents(scene) {
         let ship = scene.getObjectByName("ship")
         let activeModel;
 
-        console.log(previousCamera)
-
         if (signal !== undefined) {
             signal.visible = false;
         }
