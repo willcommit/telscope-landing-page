@@ -27,6 +27,8 @@
         position: absolute;
         display: flex;
         align-items: center;
+        flex-direction: column;
+        justify-content: center;
         overflow: hidden;
         z-index: 80;
         left: 0;
@@ -62,10 +64,16 @@
     iframe {
         width: 1920px;
         height: 1080px;
-        transform: scale(0.5);
+        transform: scale(0.75);
     }
 
-    @media (max-width: 1080px) {
+    @media (max-width: 1920px) {
+        iframe {
+            transform: scale(0.5);
+        }   
+    }
+
+    @media (max-width: 1000px) {
         .open {
             display: none;
         }
