@@ -12,7 +12,17 @@
 {#if show}
     <div class="modal" transition:fly={{ x: 200, duration: 1000 }}>
         <div class="modal-content">
-            <span class="close" on:click={toggle}>&times;</span>
+            <span class="close" on:click={toggle}
+                ><svg
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20px"
+                    height="20px"
+                    ><path
+                        d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+                    /></svg>
+                </span>
             <div class="modal-text">
                 {@html content}
             </div>
@@ -43,13 +53,15 @@
     }
 
     .modal-content {
+        display: flex;
+        flex-direction: column;
         grid-column-start: 5;
         grid-column-end: 6;
         grid-row-start: 1;
         grid-row-end: 5;
         background-color: hsla(0, 0%, 97%, 0.25);
         backdrop-filter: blur(5px);
-        padding: 20px;
+        padding: 1em;
         border-radius: 18px;
         border: none;
         margin: 1rem;
@@ -66,18 +78,12 @@
     }
 
     .close {
-        position: absolute;
-        color: white;
-        font-weight: 100;
-        top: 0.5rem;
-        right: 1.2rem;
-        font-size: 28px;
+        margin-left: auto;
     }
 
-    .close:hover,
-    .close:focus {
-        color: #29d9ef;
-        text-decoration: none;
+    .close svg *:hover,
+    .close svg *:focus {
+        fill: #29d9ef;
         cursor: pointer;
     }
 
