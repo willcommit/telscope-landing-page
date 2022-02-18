@@ -96,7 +96,7 @@
         box-shadow: 0px 30px 70px rgb(60 0 189 / 13%);
         will-change: transform;
         cursor: default;
-        z-index: 3;
+        z-index: 45;
         user-select: none;
         opacity: 1;
         display: flex;
