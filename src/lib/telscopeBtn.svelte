@@ -12,8 +12,6 @@
     <div class="modal" transition:fly={{ x: -200, duration: 1000 }}>
         <iframe
             title="telscope app"
-            width="1920"
-            height="1080"
             src="https://demo.telscope.no/auth/login-page"
             frameborder="0"
         />
@@ -64,16 +62,22 @@
     iframe {
         width: 1920px;
         height: 1080px;
-        transform: scale(0.75);
+        transform: scale(1);
     }
 
-    @media (max-width: 1920px) {
+    @media (max-width: 1500px) {
         iframe {
             transform: scale(0.5);
         }   
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1960px) and (min-width: 1501px) {
+        iframe {
+            transform: scale(0.75);
+        }   
+    }
+
+    @media (max-width: 1150px) {
         .open {
             display: none;
         }
