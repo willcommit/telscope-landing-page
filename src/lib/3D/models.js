@@ -58,6 +58,7 @@ function createSat() {
   loader.load(satModel, function (gltf) {
 
     gltf.scene.children[0].material.opacity = 0.4;
+    gltf.scene.children[0].visible = false
     scene.add(gltf.scene);
 
   }, undefined, function (error) {

@@ -6,7 +6,7 @@ import TWEEN from '@tweenjs/tween.js'
 import { Vector3 } from 'three';
 
 let previousModel   
-let signal, other1, other2;
+let signal, other1, other2, sat;
 let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
 
 export function listenEvents(scene) {
@@ -22,6 +22,7 @@ export function listenEvents(scene) {
             signal.visible = false;
             other1.visible = false;
             other2.visible = false;
+            sat.visible = false;
         }
 
         ship.material.opacity = 0.1;
@@ -41,11 +42,13 @@ export function listenEvents(scene) {
             signal = scene.getObjectByName("signal")
             other1 = scene.getObjectByName("other1")
             other2 = scene.getObjectByName("other2")
-            signal.visible = true;
+            sat = scene.getObjectByName("sat")
 
-            console.log(other1)
+            
+            signal.visible = true;
             other1.visible = true;
             other2.visible = true;
+            sat.visible = true;
         }
 
         if (previousCamera !== undefined) {
