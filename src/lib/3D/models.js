@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import shipModel from '../../assets/ship.gltf?url';
 import landModel from '../../assets/land.gltf?url';
 import satModel from '../../assets/sat.gltf?url';
+import dataModel from '../../assets/data.gltf?url';
 import otherModel from '../../assets/other.gltf?url';
 import { scene } from './canvas';
 import { listenEvents } from './events';
@@ -26,7 +27,6 @@ function createShip() {
 
   loader.load(shipModel, function (gltf) {
 
-    // @ts-ignore
     createMaterials(gltf.scene.children[0].material)
 
     scene.add(gltf.scene);
@@ -43,8 +43,6 @@ function createLand() {
   loader.load(landModel, function (gltf) {
     scene.add(gltf.scene);
 
-    console.log(gltf.scene)
-
     gltf.scene.children[0].children[0].material.opacity = 0.2;
 
   }, undefined, function (error) {
@@ -58,7 +56,21 @@ function createSat() {
   loader.load(satModel, function (gltf) {
 
     gltf.scene.children[0].material.opacity = 0.4;
-    gltf.scene.children[0].visible = false
+    gltf.scene.children[0].visible = true;
+    scene.add(gltf.scene);
+
+  }, undefined, function (error) {
+
+    console.error(error);
+  });
+}
+
+function createData() {
+
+  loader.load(dataModel, function (gltf) {
+
+    gltf.scene.children[0].material.opacity = 0.1;
+    gltf.scene.children[0].visible = true;
     scene.add(gltf.scene);
 
   }, undefined, function (error) {
@@ -97,5 +109,6 @@ export function loadModels() {
   createShip()
   createLand()
   createSat()
+  createData()
   createOther()
 }

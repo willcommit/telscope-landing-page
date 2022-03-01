@@ -22,7 +22,7 @@ export function listenEvents(scene) {
             signal.visible = false;
             other1.visible = false;
             other2.visible = false;
-            sat.visible = false;
+            sat.visible = true;
         }
 
         ship.material.opacity = 0.1;
