@@ -4,7 +4,6 @@ import { createWater, waterPhysics } from './water';
 import { createSky } from './sky'
 import { createOrbitCamera, camera } from './camera';
 import { loadModels } from './models';
-import { addSignal } from './signals';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -34,8 +33,6 @@ function init(bg) {
   createOrbitCamera(renderer)
 
   loadModels()
-
-  addSignal(scene)
 
   const renderScene = new RenderPass(scene, camera);
 

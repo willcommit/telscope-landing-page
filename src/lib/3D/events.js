@@ -4,9 +4,11 @@ import { highlightMaterial } from './models.js';
 import { camera } from './camera.js';
 import TWEEN from '@tweenjs/tween.js'
 import { Vector3 } from 'three';
+import { createSignal } from './signals';
+
 
 let previousModel   
-let signal, other1, other2, sat;
+let shipSignal, ship1, ship2, sat, antenna, ship;
 let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
 
 export function listenEvents(scene) {
@@ -15,13 +17,14 @@ export function listenEvents(scene) {
         
         let activePresentation = presentations[value]
         let activeCamera = activePresentation.sceneCamera
-        let ship = scene.getObjectByName("ship")
         let activeModel;
+        ship = scene.getObjectByName("ship")
+        
 
-        if (signal !== undefined) {
-            signal.visible = false;
-            other1.visible = false;
-            other2.visible = false;
+        if (shipSignal !== undefined) {
+            shipSignal.visible = false;
+            ship1.visible = false;
+            ship2.visible = false;
             sat.visible = true;
         }
 
@@ -39,15 +42,18 @@ export function listenEvents(scene) {
         }
 
         if (activePresentation.showSignal) {
-            signal = scene.getObjectByName("signal")
-            other1 = scene.getObjectByName("other1")
-            other2 = scene.getObjectByName("other2")
-            sat = scene.getObjectByName("sat")
 
-            
-            signal.visible = true;
-            other1.visible = true;
-            other2.visible = true;
+            sat = scene.getObjectByName("sat")
+            antenna = scene.getObjectByName("antenna")
+            ship1 = scene.getObjectByName("other1")
+            ship2 = scene.getObjectByName("other2")
+
+            shipSignal = createSignal("shipSignal", antenna.position, sat.position, 500)
+
+            scene.add(shipSignal)
+
+            ship1.visible = true;
+            ship2.visible = true;
             sat.visible = true;
         }
 

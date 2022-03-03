@@ -1,29 +1,19 @@
 import { AdditiveBlending, DoubleSide, Points } from "three";
 import { PointsMaterial } from "three";
-import { BufferGeometry, CatmullRomCurve3, Vector3 } from "three";
+import { BufferGeometry, CatmullRomCurve3 } from "three";
 
-const point = new Vector3();
-let positions;
-
-export function addSignal(scene) {
+export function createSignal(name, startPos, endPos, points) {
 
     const curve = new CatmullRomCurve3([
-        new Vector3(-2, 29.5, 20),
-        new Vector3(-173, 127, -130)
+        startPos,
+        endPos
     ]);
 
-    //const geometry = new TubeGeometry(curve, 80, 0.3, 1, false)
-
-    positions = curve.getPoints(50);
+    const positions = curve.getPoints(points);
     const geometry = new BufferGeometry().setFromPoints(positions);
 
-    // const material = new PointsMaterial ({
-    //     size: 0.3
-
-    // })
-
     const material = new PointsMaterial({
-        size: 0.4,
+        size: 0.1,
         blending: AdditiveBlending,
         color: 0x0086ff,
         side: DoubleSide,
@@ -33,8 +23,8 @@ export function addSignal(scene) {
 
     // Create the final object to add to the scene
     const signal = new Points(geometry, material);
-    signal.visible = false;
-    signal.name = "signal";
+    signal.visible = true;
+    signal.name = `${name}Signal`;
 
-    scene.add(signal)
+    return signal
 }
