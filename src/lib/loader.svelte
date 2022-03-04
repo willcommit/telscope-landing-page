@@ -25,7 +25,7 @@
         width: 100%;
         height: 100%;
         z-index: 9999;
-        background: url("../assets/logo.png") center no-repeat rgb(0, 0, 0);
+        background: url("../assets/logo.svg") center no-repeat rgb(0, 0, 0);
         background-size: 200px;
     }
 </style>

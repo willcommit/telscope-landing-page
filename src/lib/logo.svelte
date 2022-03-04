@@ -1,5 +1,5 @@
 <script>
-    import logo from "../assets/logo.png";
+    import logo from "../assets/logo.svg";
 </script>
 
 <a href="https://telko.no/telscope/" target="_blank">

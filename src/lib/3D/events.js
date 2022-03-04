@@ -8,7 +8,7 @@ import { createSignal } from './signals';
 
 
 let previousModel   
-let shipSignal, ship1, ship2, sat, antenna, ship;
+let shipSignal, house1Signal, house2Signal, ship1, ship2, sat, antenna, ship;
 let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
 
 export function listenEvents(scene) {
@@ -47,6 +47,7 @@ export function listenEvents(scene) {
             antenna = scene.getObjectByName("antenna")
             ship1 = scene.getObjectByName("other1")
             ship2 = scene.getObjectByName("other2")
+            // house1 = scene.getObjectByName
 
             shipSignal = createSignal("shipSignal", antenna.position, sat.position, 500)
 
