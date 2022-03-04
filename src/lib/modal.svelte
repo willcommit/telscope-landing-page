@@ -1,8 +1,8 @@
 <script>
     import { fly, fade } from "svelte/transition";
+    import ModalContent from "./modalContent.svelte";
 
     let show = true;
-    export let content = "<h1>Default Text!</h1>";
 
     function toggle() {
         show = !show;
@@ -10,8 +10,8 @@
 </script>
 
 {#if show}
-    <div class="modal" transition:fly={{ x: 200, duration: 1000 }}>
-        <div class="modal-content">
+    <div class="modal-bg" transition:fly={{ x: 200, duration: 1000 }}>
+        <div class="modal">
             <span class="close" on:click={toggle}
                 ><svg
                     fill="white"
@@ -22,10 +22,8 @@
                     ><path
                         d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
                     /></svg>
-                </span>
-            <div class="modal-text">
-                {@html content}
-            </div>
+            </span>
+            <ModalContent />
         </div>
     </div>
 {:else}
@@ -39,8 +37,9 @@
 {/if}
 
 <style>
-    .modal {
-        display: grid;
+    .modal-bg {
+        display: flex;
+        justify-content: right;
         overflow-x: hidden;
         grid-template-columns: auto auto auto auto auto;
         grid-template-rows: auto auto auto auto;
@@ -52,29 +51,19 @@
         height: 100vh;
     }
 
-    .modal-content {
+    .modal {
         display: flex;
         flex-direction: column;
-        grid-column-start: 5;
-        grid-column-end: 6;
-        grid-row-start: 1;
-        grid-row-end: 5;
+        align-items: center;
         background-color: hsla(0, 0%, 97%, 0.25);
         backdrop-filter: blur(5px);
         padding: 1em;
         border-radius: 18px;
         border: none;
         margin: 1rem;
-    }
-
-    .modal-text {
         text-align: center;
         font-weight: 100;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        color: white;     
     }
 
     .close {
@@ -109,12 +98,10 @@
     }
 
     @media (max-width: 1000px) {
-        .modal-content {
-            grid-column-start: 1;
-            grid-column-end: 6;
-            grid-row-start: 1;
-            grid-row-end: 2;
-            margin-top: 3em;
+        .modal-bg {
+            justify-content: center;
+            margin-top: 2rem;
+            max-height: 500px;
         }
     }
 </style>

@@ -1,7 +1,4 @@
 <script>
-  import { activePresentation } from "./stores";
-  import { presentations } from "./lib/3D/presentation";
-
   import { onMount } from "svelte";
   import { createCanvas } from "./lib/3D/canvas";
   import Modal from "./lib/modal.svelte";
@@ -12,15 +9,11 @@
   import TelscopeBtn from "./lib/telscopeBtn.svelte"
 
   let bg;
-  let presentation;
 
   onMount(() => {
     createCanvas(bg);
   });
 
-  activePresentation.subscribe((value) => {
-    presentation = presentations[value];
-  });
 </script>
 
 <main>
@@ -29,7 +22,7 @@
   <Logo />
   <TelscopeBtn/>
   <Navigation />
-  <Modal content={presentation.slide} />
+  <Modal />
   <FullscreenBtn/>
 </main>
 
