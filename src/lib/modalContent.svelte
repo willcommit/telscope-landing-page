@@ -5,13 +5,15 @@
     let text;
     let content;
 
-    content = JSON.parse(localStorage.getItem('slides'));
+    content = JSON.parse(localStorage.getItem("slides"));
 
-    activePresentation.subscribe((value) => {
-        header = content.data[value].rubrik
-        text = content.data[value].text
-    });
-
+    if (content != undefined) {
+        activePresentation.subscribe((value) => {
+            header = content.data[value].rubrik;
+            text = content.data[value].text;
+        });
+    }
+    
 </script>
 
 <div class="modalContent">
