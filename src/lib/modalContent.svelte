@@ -1,11 +1,12 @@
 <script>
+import { onMount } from "svelte";
+
     import { activePresentation } from "../stores";
 
     let header;
     let text;
     let content;
 
-    content = JSON.parse(localStorage.getItem("slides"));
 
     if (content != undefined) {
         activePresentation.subscribe((value) => {
@@ -13,7 +14,10 @@
             text = content.data[value].text;
         });
     }
-    
+
+    onMount(() => {
+        content = JSON.parse(localStorage.getItem("slides"));
+    })
 </script>
 
 <div class="modalContent">
