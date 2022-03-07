@@ -1,4 +1,4 @@
-import {  Vector3, ShaderMaterial, Color, DoubleSide, SphereGeometry, Mesh } from 'three';
+import {  Vector3, ShaderMaterial, DoubleSide, SphereGeometry, Mesh } from 'three';
 import StarrySkyShader from './StarrySkyShader';
 
 
