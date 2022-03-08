@@ -32,7 +32,7 @@ export function listenEvents(scene) {
             ship2.visible = false;
             house1.visible = false;
             house2.visible = false;
-            sat.visible = true;
+            sat.visible = false;
         }
 
         ship.material.opacity = 0.1;
