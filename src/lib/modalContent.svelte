@@ -4,44 +4,38 @@
     import { activePresentation } from "../stores";
 
     let url = "https://xbc452m8.directus.app/items/slides";
-    let header;
-    let text;
-    let cache;
     let slides;
+    let cache = JSON.parse(localStorage.getItem("slides"));
 
-    cache = JSON.parse(localStorage.getItem("slides"));
 
-    activePresentation.subscribe((value) => {
-        if (cache != undefined) {
-            header = cache.data[value].rubrik;
-            text = cache.data[value].text;
+    async function getSlides() {
+        const res = await fetch(url);
+        const slides = await res.json();
+
+        if (res.ok) {
+            localStorage.setItem("slides", JSON.stringify(slides));
+            cache = slides;
+            return slides;
+        } else {
+            return cache;         
         }
-    });
+    }
 
-    onMount(async () => {
-        await fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Bad request");
-                }
-                return response.json();
-            })
-            .then((result) => {
-                cache = result;
-                // header = result.data[0].rubrik;
-                // text = result.data[0].text;
-                localStorage.setItem("slides", JSON.stringify(result));
-            })
-            .catch((error) => {
-                console.error("There is a problem with the CMS API:", error);
-            });
+    let promise = getSlides();
+
+    onMount(() => {
+        promise = getSlides();
     });
 </script>
 
-<div class="modalContent">
-    <h1>{header}</h1>
-    <div class="section">{@html text}</div>
-</div>
+{#await promise}
+    <p>...waiting</p>
+{:then slides}
+    <div class="modalContent">
+        <h1>{slides.data[$activePresentation].rubrik}</h1>
+        <div class="section">{@html slides.data[$activePresentation].text}</div>
+    </div>
+{/await}
 
 <style>
     .modalContent {

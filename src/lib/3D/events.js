@@ -8,7 +8,7 @@ import { createSignal } from './signals';
 
 
 let previousModel   
-let shipSignal, house1Signal, house2Signal, ship1, ship2, sat, antenna, ship;
+let shipSignal, house1, house1Signal, house2, house2Signal, ship1, ship1Signal, ship2, ship2Signal, sat, antenna, ship;
 let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
 
 export function listenEvents(scene) {
@@ -23,8 +23,15 @@ export function listenEvents(scene) {
 
         if (shipSignal !== undefined) {
             shipSignal.visible = false;
+            house1Signal.visible = false;
+            house2Signal.visible = false;
+            ship1Signal.visible = false;
+            ship2Signal.visible = false;
+
             ship1.visible = false;
             ship2.visible = false;
+            house1.visible = false;
+            house2.visible = false;
             sat.visible = true;
         }
 
@@ -47,14 +54,21 @@ export function listenEvents(scene) {
             antenna = scene.getObjectByName("antenna")
             ship1 = scene.getObjectByName("other1")
             ship2 = scene.getObjectByName("other2")
-            // house1 = scene.getObjectByName
+            house1 = scene.getObjectByName("other3")
+            house2 = scene.getObjectByName("other4")
 
             shipSignal = createSignal("shipSignal", antenna.position, sat.position, 500)
+            house1Signal = createSignal("shipSignal", house1.position, sat.position, 500)
+            house2Signal = createSignal("shipSignal", house2.position, sat.position, 500)
+            ship1Signal = createSignal("shipSignal", ship1.position, sat.position, 1000)
+            ship2Signal = createSignal("shipSignal", ship2.position, sat.position, 600)
 
-            scene.add(shipSignal)
+            scene.add(shipSignal, house1Signal, house2Signal, ship1Signal, ship2Signal)
 
             ship1.visible = true;
             ship2.visible = true;
+            house1.visible = true;
+            house2.visible = true;
             sat.visible = true;
         }
 

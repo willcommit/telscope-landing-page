@@ -58,8 +58,6 @@ function createLand() {
   loader.load(landModel, function (gltf) {
     scene.add(gltf.scene);
 
-    gltf.scene.children[0].children[0].material.opacity = 0.2;
-
   }, undefined, function (error) {
 
     console.error(error);
@@ -104,6 +102,11 @@ function createOther() {
     gltf.scene.children[1].material.opacity = 0.2;
     gltf.scene.children[1].visible = false;
     gltf.scene.children[1].name = "other2";
+    gltf.scene.children[2].material.opacity = 0.3;
+    gltf.scene.children[2].visible = false;
+    gltf.scene.children[2].name = "other3";
+    gltf.scene.children[3].visible = false;
+    gltf.scene.children[3].name = "other4";
 
     scene.add(gltf.scene);
 
