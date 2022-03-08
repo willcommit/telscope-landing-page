@@ -4,5 +4,5 @@ export const presentations = [
     {id: 2, slide: "CCR", activeModel: "ccr", sceneCamera: { x: -30 , y:20, z:-10, lookAtX: -20, lookAtY: 15, lookAtZ: 0 }},
     {id: 3, slide: "Network", activeModel: "network",sceneCamera: { x: -30, y:20, z:15, lookAtX: 20, lookAtY: 5, lookAtZ:35 }},
     {id: 4, slide: "Bridge", activeModel: "bridge", sceneCamera: { x: -10 , y:30, z:50, lookAtX: 20, lookAtY: 0, lookAtZ: 0 }},
-    {id: 5, slide: "Shore Connection", activeModel: "antenna", showSignal: true, sceneCamera: { x: 40 , y:30, z:80, lookAtX: -60, lookAtY: 30, lookAtZ: -50 }}
+    {id: 5, slide: "Shore Connection", activeModel: "antenna", showSignal: true, sceneCamera: { x: 110 , y:40, z:0, lookAtX: -10, lookAtY: 30, lookAtZ: -10 }}
 ]
