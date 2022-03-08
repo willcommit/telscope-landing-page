@@ -4,7 +4,6 @@
     import { activePresentation } from "../stores";
 
     let url = "https://xbc452m8.directus.app/items/slides";
-    let slides;
     let cache = JSON.parse(localStorage.getItem("slides"));
 
 
