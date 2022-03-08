@@ -41,7 +41,7 @@
     .modal-bg {
         display: flex;
         justify-content: right;
-        justify-items: right;
+        -webkit-justify-content: right;
         overflow-x: hidden;
         position: absolute;
         z-index: 40;
