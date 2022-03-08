@@ -40,13 +40,9 @@
 <style>
     .modal-bg {
         display: flex;
-        justify-content: right;
-        -webkit-justify-content: right;
+        justify-content: flex-end;
         overflow-x: hidden;
         position: absolute;
-        z-index: 40;
-        right: 0;
-        top: 0;
         width: 100%;
         height: 100vh;
     }
