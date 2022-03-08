@@ -43,6 +43,7 @@
         justify-content: right;
         justify-items: right;
         overflow-x: hidden;
+        position: absolute;
         z-index: 40;
         width: 100%;
         height: 100vh;
