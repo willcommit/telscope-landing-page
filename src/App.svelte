@@ -9,23 +9,8 @@
   import TelscopeBtn from "./lib/telscopeBtn.svelte";
 
   let bg;
-  let url = "https://xbc452m8.directus.app/items/slides";
 
   onMount(async () => {
-    await fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Bad request");
-                }
-                return response.json();
-            })
-            .then((result) => {
-                localStorage.setItem("slides", JSON.stringify(result))
-            })
-            .catch((error) => {
-                console.error("There is a problem with the CMS API:", error);
-            });
-
     createCanvas(bg);
   });
 </script>
