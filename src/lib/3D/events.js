@@ -9,7 +9,7 @@ import { createSignal } from './signals';
 
 
 let previousModel   
-let shipSignal, house1, house1Signal, house2, house2Signal, ship1, ship1Signal, ship2, ship2Signal, sat, antenna, ship;
+let shipSignal, datacenter, datacenterSignal, office, officeSignal, gas, gasSignal, gas, ship2Signal, sat, antenna, ship;
 let startPresentations = get(presentations)
 let previousCamera = JSON.parse(JSON.stringify(startPresentations[0].sceneCamera));
 
@@ -48,6 +48,8 @@ export function listenEvents(scene) {
         if (activePresentation.activeModel) {
             activeModel = scene.getObjectByName(activePresentation.activeModel)
             previousModel = scene.getObjectByName(activePresentation.activeModel)
+            console.log(activeModel)
+            console.log(highlightMaterial)
             activeModel.material = highlightMaterial;
         }
 
