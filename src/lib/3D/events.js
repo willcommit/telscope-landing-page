@@ -1,5 +1,6 @@
+import { get } from 'svelte/store';
 import { activePresentation } from '../../stores.js';
-import { presentations } from './presentation'
+import { presentations } from '../../stores'
 import { highlightMaterial } from './models.js';
 import { camera } from './camera.js';
 import TWEEN from '@tweenjs/tween.js'
@@ -9,13 +10,15 @@ import { createSignal } from './signals';
 
 let previousModel   
 let shipSignal, house1, house1Signal, house2, house2Signal, ship1, ship1Signal, ship2, ship2Signal, sat, antenna, ship;
-let previousCamera = JSON.parse(JSON.stringify(presentations[0].sceneCamera));
+let startPresentations = get(presentations)
+let previousCamera = JSON.parse(JSON.stringify(startPresentations[0].sceneCamera));
 
 export function listenEvents(scene) {
 
     activePresentation.subscribe((value) => {
         
-        let activePresentation = presentations[value]
+        let latestPresentations = get(presentations)
+        let activePresentation = latestPresentations[value]
         let activeCamera = activePresentation.sceneCamera
         let activeModel;
         ship = scene.getObjectByName("ship")

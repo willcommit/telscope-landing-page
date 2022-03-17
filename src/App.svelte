@@ -7,10 +7,39 @@
   import Loader from "./lib/loader.svelte";
   import FullscreenBtn from "./lib/fullscreenBtn.svelte";
   import TelscopeBtn from "./lib/telscopeBtn.svelte";
+  import { presentations } from "./stores";
 
   let bg;
 
-  onMount(async () => {
+  const url = "https://xbc452m8.directus.app/items/slides";
+
+  async function getSlides() {
+    const res = await fetch(url);
+    const slides = await res.json();
+    const cache = JSON.parse(localStorage.getItem("slides"));
+
+    if (res.ok) {
+      localStorage.setItem("slides", JSON.stringify(slides));
+      $presentations.forEach((presentation, index) => {
+        presentation.id = slides.data[index].id;
+        presentation.slide = slides.data[index].rubrik;
+        presentation.text = slides.data[index].text;
+      });
+    } else {
+      $presentations.forEach((presentation, index) => {
+        presentation.id = cache[index].id;
+        presentation.slide = cache[index].rubrik;
+        presentation.text = cache[index].text;
+      });
+    }
+  }
+
+  let promise = getSlides();
+
+  onMount(() => {
+
+    promise = getSlides();
+
     createCanvas(bg);
   });
 </script>
@@ -20,8 +49,10 @@
   <Loader />
   <Logo />
   <TelscopeBtn />
-  <Navigation />
-  <Modal />
+  {#await promise then value}
+    <Navigation />
+    <Modal />
+  {/await}
   <FullscreenBtn />
 </main>
 

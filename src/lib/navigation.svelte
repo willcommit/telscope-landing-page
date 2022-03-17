@@ -1,23 +1,23 @@
 <script>
-    import { activePresentation } from "../stores.js";
-    import { presentations } from "./3D/presentation";
+    import { activePresentation, presentations } from "../stores.js";
+    // import { presentations } from "./3D/presentation";
 
     let forwardFilled = true;
     let backwardFilled = false;
     let i = 0;
 
     function forwardClick() {
-        if (i < presentations.length - 1) {
+        if (i < $presentations.length - 1) {
             forwardFilled = true;
             backwardFilled = true;
             i += 1;
         }
         
-        if (i === presentations.length - 1) {
+        if (i === $presentations.length - 1) {
             forwardFilled = false;
         }
 
-        $activePresentation = presentations[i].id;
+        $activePresentation = i;
     }
 
     function backwardClick() {
@@ -31,7 +31,7 @@
             backwardFilled = false;
         }
 
-        $activePresentation = presentations[i].id;
+        $activePresentation = i;
     }
 </script>
 
@@ -56,7 +56,7 @@
         </div>
     </button>
     <div class="label">
-        <div class="inner">{presentations[i].slide}</div>
+        <div class="inner">{$presentations[i].slide}</div>
     </div>
     <button on:click={forwardClick} class="arrow">
         <div class="icon-forward" class:forwardFilled>
@@ -103,6 +103,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        text-align: center;
     }
 
     button {

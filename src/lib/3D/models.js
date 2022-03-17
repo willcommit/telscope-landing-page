@@ -8,7 +8,6 @@ import networkModel from '../../assets/network.gltf?url';
 import otherModel from '../../assets/other.gltf?url';
 import { scene } from './canvas';
 import { listenEvents } from './events';
-
 import { loaded } from '../../stores';
 import { MeshStandardMaterial } from 'three';
 
@@ -16,9 +15,8 @@ const manager = new LoadingManager();
 export let highlightMaterial;
 
 manager.onLoad = function () {
-
-  loaded.update(n => n = true)
-  listenEvents(scene)
+  loaded.update(n => n = true);
+  listenEvents(scene);
 
 };
 
