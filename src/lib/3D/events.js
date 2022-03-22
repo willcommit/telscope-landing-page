@@ -9,7 +9,7 @@ import { createSignal } from './signals';
 
 
 let previousModel   
-let shipSignal, datacenter, datacenterSignal, office, officeSignal, gas, gasSignal, gas, ship2Signal, sat, antenna, ship;
+let shipSignal, datacenter, datacenterSignal, office, officeSignal, gas, gasSignal, container, containerSignal, sat, antenna, ship;
 let startPresentations = get(presentations)
 let previousCamera = JSON.parse(JSON.stringify(startPresentations[0].sceneCamera));
 
@@ -25,16 +25,16 @@ export function listenEvents(scene) {
         
 
         if (shipSignal !== undefined) {
+            datacenterSignal.visible = false;
+            officeSignal.visible = false;
+            containerSignal.visible = false;
+            gasSignal.visible = false;
             shipSignal.visible = false;
-            house1Signal.visible = false;
-            house2Signal.visible = false;
-            ship1Signal.visible = false;
-            ship2Signal.visible = false;
 
-            ship1.visible = false;
-            ship2.visible = false;
-            house1.visible = false;
-            house2.visible = false;
+            datacenter.visible = false;
+            office.visible = false;
+            gas.visible = false;
+            container.visible = false;
             sat.visible = false;
         }
 
@@ -57,10 +57,10 @@ export function listenEvents(scene) {
 
             sat = scene.getObjectByName("sat")
             antenna = scene.getObjectByName("antenna")
-            ship1 = scene.getObjectByName("other1")
-            ship2 = scene.getObjectByName("other2")
-            house1 = scene.getObjectByName("other3")
-            house2 = scene.getObjectByName("other4")
+            datacenter = scene.getObjectByName("datacenter")
+            gas = scene.getObjectByName("gas")
+            container = scene.getObjectByName("container")
+            ship = scene.getObjectByName("ship")
 
             shipSignal = createSignal("shipSignal", antenna.position, sat.position, 500)
             house1Signal = createSignal("shipSignal", house1.position, sat.position, 500)
