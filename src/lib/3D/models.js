@@ -28,8 +28,8 @@ export function loadModels() {
   loadModel(satModel, 0.2, false, false)
   loadModel(networkModel, 0.2, true, false)
   loadModel(containerModel, 0.2, false, false)
-  loadModel(gasModel, 0.2, false, false)
-  loadModel(tankModel, 0.2, false, false)
+  loadModel(gasModel, 0.2, true, false)
+  loadModel(tankModel, 0.2, true, false)
   loadModel(officeModel, 0.2, false, false)
   loadModel(datacenterModel, 0.2, false, false)
 }
@@ -43,9 +43,16 @@ function loadModel(model, opacity, visible, createMaterial) {
   
 
   loader.load(model, function (gltf) {
-    console.log(gltf.scene.children[0].name)
 
-    gltf.scene.children[0].material.opacity = opacity;
+    try {
+      gltf.scene.children[0].material.opacity = opacity;
+      
+    } catch (error) {
+
+      console.log(gltf.scene.children[0].name)
+      
+    }
+
     gltf.scene.children[0].visible = visible;
 
     if (createMaterial) {

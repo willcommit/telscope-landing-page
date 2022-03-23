@@ -1,11 +1,11 @@
 import { get } from 'svelte/store';
-import { activePresentation } from '../../stores.js';
-import { presentations } from '../../stores'
+import { activePresentation, presentations } from '../../stores.js';
 import { highlightMaterial } from './models.js';
 import { camera } from './camera.js';
 import TWEEN from '@tweenjs/tween.js'
 import { Vector3 } from 'three';
 import { createSignal } from './signals';
+import { controls } from './camera'
 
 
 let previousModel   
@@ -33,7 +33,6 @@ export function listenEvents(scene) {
 
             datacenter.visible = false;
             office.visible = false;
-            gas.visible = false;
             container.visible = false;
             sat.visible = false;
         }
@@ -48,32 +47,32 @@ export function listenEvents(scene) {
         if (activePresentation.activeModel) {
             activeModel = scene.getObjectByName(activePresentation.activeModel)
             previousModel = scene.getObjectByName(activePresentation.activeModel)
-            console.log(activeModel)
-            console.log(highlightMaterial)
             activeModel.material = highlightMaterial;
+            controls.target.set(activeModel.position.x, activeModel.position.y, activeModel.position.z)
         }
 
         if (activePresentation.showSignal) {
 
             sat = scene.getObjectByName("sat")
             antenna = scene.getObjectByName("antenna")
+            office = scene.getObjectByName("office")
             datacenter = scene.getObjectByName("datacenter")
             gas = scene.getObjectByName("gas")
             container = scene.getObjectByName("container")
             ship = scene.getObjectByName("ship")
 
             shipSignal = createSignal("shipSignal", antenna.position, sat.position, 500)
-            house1Signal = createSignal("shipSignal", house1.position, sat.position, 500)
-            house2Signal = createSignal("shipSignal", house2.position, sat.position, 500)
-            ship1Signal = createSignal("shipSignal", ship1.position, sat.position, 1000)
-            ship2Signal = createSignal("shipSignal", ship2.position, sat.position, 600)
+            officeSignal = createSignal("officeSignal", office.position, sat.position, 500)
+            datacenterSignal = createSignal("datacenterSignal", datacenter.position, sat.position, 500)
+            gasSignal = createSignal("gasSignal", gas.position, sat.position, 1000)
+            containerSignal = createSignal("containerSignal", container.position, sat.position, 600)
 
-            scene.add(shipSignal, house1Signal, house2Signal, ship1Signal, ship2Signal)
+            scene.add(shipSignal, officeSignal, datacenterSignal, gasSignal, containerSignal)
 
-            ship1.visible = true;
-            ship2.visible = true;
-            house1.visible = true;
-            house2.visible = true;
+            gas.visible = true;
+            container.visible = true;
+            office.visible = true;
+            datacenter.visible = true;
             sat.visible = true;
         }
 
