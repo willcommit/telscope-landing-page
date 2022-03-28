@@ -17,9 +17,6 @@
 <style>
     .se-pre-con {
         position: absolute;
-        left: 100px;
-        top: 0;
-        position: fixed;
         left: 0px;
         top: 0px;
         width: 100%;
