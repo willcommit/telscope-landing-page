@@ -9,7 +9,7 @@ import { controls } from './camera'
 
 
 let previousModel   
-let shipSignal, datacenter, datacenterSignal, office, officeSignal, gas, gasSignal, container, containerSignal, sat, antenna, ship;
+let shipSignal, datacenter, datacenterSignal, office, officeSignal, tanks, gas, gasSignal, container, containerSignal, sat, antenna, ship;
 let startPresentations = get(presentations)
 let previousCamera = JSON.parse(JSON.stringify(startPresentations[0].sceneCamera));
 
@@ -35,6 +35,8 @@ export function listenEvents(scene) {
             office.visible = false;
             container.visible = false;
             sat.visible = false;
+            gas.visible = false;
+            tanks.visible = false;
         }
 
         ship.material.opacity = 0.1;
@@ -45,10 +47,16 @@ export function listenEvents(scene) {
         }
 
         if (activePresentation.activeModel) {
+
             activeModel = scene.getObjectByName(activePresentation.activeModel)
             previousModel = scene.getObjectByName(activePresentation.activeModel)
             activeModel.material = highlightMaterial;
             controls.target.set(activeModel.position.x, activeModel.position.y, activeModel.position.z)
+
+            if(activePresentation.activeModel === 'tanks') {
+                gas.visible = true;
+                tanks.visible = true;
+            }
         }
 
         if (activePresentation.showSignal) {
@@ -58,6 +66,7 @@ export function listenEvents(scene) {
             office = scene.getObjectByName("office")
             datacenter = scene.getObjectByName("datacenter")
             gas = scene.getObjectByName("gas")
+            tanks = scene.getObjectByName("tanks")
             container = scene.getObjectByName("container")
             ship = scene.getObjectByName("ship")
 
@@ -70,6 +79,7 @@ export function listenEvents(scene) {
             scene.add(shipSignal, officeSignal, datacenterSignal, gasSignal, containerSignal)
 
             gas.visible = true;
+            tanks.visible = true;
             container.visible = true;
             office.visible = true;
             datacenter.visible = true;
@@ -94,55 +104,4 @@ const updateCamera = function (object) {
     camera.position.set(object.x, object.y, object.z);
     camera.lookAt(new Vector3(object.lookAtX, object.lookAtY, object.lookAtZ))
 }
-
-// export function addHoverEventHighlight(camera, scene) {
-//     window.addEventListener('mousemove', event => {
-
-//         pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-//         pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-//         const found = intersect(pointer, camera, scene);
-
-//         if (found[0].object.name === 'ship') {
-//             let ship = found[0].object;
-
-//             if (INTERSECTED != found[0].object) {
-
-//                 if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-
-//                 INTERSECTED = found[0].object;
-//                 // @ts-ignore
-//                 INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-//                 // @ts-ignore
-//                 INTERSECTED.material.emissive.setHex(0xff0000);
-//             }
-//         } else {
-
-//             if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-
-//             INTERSECTED = null;
-//         }
-//     });
-// }
-
-// export function addClickEventOpenModal(camera, scene) {
-//     window.addEventListener('click', event => {
-
-//         clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-//         clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-//         const found = intersect(clickMouse, camera, scene);
-
-//         if (found[2].object.name === 'ship') {
-
-//             showModal.update(n => n = true)
-//         }
-//     })
-// }
-
-// function intersect(pos, camera, scene) {
-//     raycaster.setFromCamera(pos, camera);
-//     return raycaster.intersectObjects(scene.children);
-// }
-
 

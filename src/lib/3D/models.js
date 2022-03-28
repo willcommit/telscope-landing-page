@@ -28,8 +28,8 @@ export function loadModels() {
   loadModel(satModel, 0.2, false, false)
   loadModel(networkModel, 0.2, true, false)
   loadModel(containerModel, 0.2, false, false)
-  loadModel(gasModel, 0.2, true, false)
-  loadModel(tankModel, 0.2, true, false)
+  loadModel(gasModel, 0.2, false, false)
+  loadModel(tankModel, 0.2, false, false)
   loadModel(officeModel, 0.2, false, false)
   loadModel(datacenterModel, 0.2, false, false)
 }
