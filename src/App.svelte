@@ -27,9 +27,9 @@
       });
     } else {
       $presentations.forEach((presentation, index) => {
-        presentation.id = cache[index].id;
-        presentation.slide = cache[index].rubrik;
-        presentation.text = cache[index].text;
+        presentation.id = cache.data[index].id;
+        presentation.slide = cache.data[index].rubrik;
+        presentation.text = cache.data[index].text;
       });
     }
   }
