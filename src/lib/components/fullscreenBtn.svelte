@@ -26,7 +26,7 @@
         outline: none;
         background: none;
         cursor: pointer;
-        background: url("../assets/fullscreen.svg") center no-repeat transparent;
+        background: url("../../assets/fullscreen.svg") center no-repeat transparent;
         transition: all .2s ease-in-out;
     }
 

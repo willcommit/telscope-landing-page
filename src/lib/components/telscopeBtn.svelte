@@ -1,18 +1,28 @@
 <script>
-    import { fly, fade } from "svelte/transition";
+    import { onMount } from "svelte";
+    import { fly } from "svelte/transition";
 
+    let url = "https://xbc452m8.directus.app/items/setup";
+    let setup;
     let show = false;
 
     function toggle() {
         show = !show;
     }
+
+    onMount(async () => {
+        const res =  await fetch(url);
+        setup = await res.json();
+    });
+
+
 </script>
 
 {#if show}
     <div class="modal" transition:fly={{ x: -200, duration: 1000 }}>
         <iframe
             title="telscope app"
-            src="https://demo.telscope.no/auth/login-page"
+            src={setup.data.telscope_url}
             frameborder="0"
         />
     </div>
@@ -49,7 +59,7 @@
         outline: none;
         background: none;
         cursor: pointer;
-        background: url("../assets/app.svg") center no-repeat transparent;
+        background: url("../../assets/app.svg") center no-repeat transparent;
         transition: all 0.2s ease-in-out;
     }
 
@@ -68,13 +78,13 @@
     @media (max-width: 1500px) {
         iframe {
             transform: scale(0.5);
-        }   
+        }
     }
 
     @media (max-width: 1960px) and (min-width: 1501px) {
         iframe {
             transform: scale(0.75);
-        }   
+        }
     }
 
     @media (max-width: 1150px) {

@@ -1,5 +1,5 @@
 <script>
-    import { activePresentation, presentations } from "../stores.js";
+    import { activePresentation, presentations } from "../../stores.js";
     // import { presentations } from "./3D/presentation";
 
     let forwardFilled = true;

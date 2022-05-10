@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
   import { createCanvas } from "./lib/3D/canvas";
-  import Modal from "./lib/modal.svelte";
-  import Logo from "./lib/logo.svelte";
-  import Navigation from "./lib/navigation.svelte";
-  import Loader from "./lib/loader.svelte";
-  import FullscreenBtn from "./lib/fullscreenBtn.svelte";
-  import TelscopeBtn from "./lib/telscopeBtn.svelte";
+  import Modal from "./lib/components/modal.svelte";
+  import Logo from "./lib/components/logo.svelte";
+  import Navigation from "./lib/components/navigation.svelte";
+  import Loader from "./lib/components/loader.svelte";
+  import FullscreenBtn from "./lib/components/fullscreenBtn.svelte";
+  import TelscopeBtn from "./lib/components/telscopeBtn.svelte";
   import { presentations } from "./stores";
 
   let bg;
