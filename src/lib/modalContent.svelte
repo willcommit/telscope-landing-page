@@ -1,6 +1,5 @@
 <script>
     import { activePresentation, presentations } from "../stores";
-
 </script>
 
 <div class="modalContent">

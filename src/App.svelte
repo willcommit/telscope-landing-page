@@ -12,20 +12,28 @@
   let bg;
 
   const url = "https://xbc452m8.directus.app/items/slides";
+  const cache = JSON.parse(localStorage.getItem("slides"));
 
   async function getSlides() {
-    const res = await fetch(url);
-    const slides = await res.json();
-    const cache = JSON.parse(localStorage.getItem("slides"));
+    try {
+      const res = await fetch(url);
+      const slides = await res.json();
 
-    if (res.ok) {
-      localStorage.setItem("slides", JSON.stringify(slides));
-      $presentations.forEach((presentation, index) => {
-        presentation.id = slides.data[index].id;
-        presentation.slide = slides.data[index].rubrik;
-        presentation.text = slides.data[index].text;
-      });
-    } else {
+      if (res.ok) {
+        localStorage.setItem("slides", JSON.stringify(slides));
+        $presentations.forEach((presentation, index) => {
+          presentation.id = slides.data[index].id;
+          presentation.slide = slides.data[index].rubrik;
+          presentation.text = slides.data[index].text;
+        });
+      } else {
+        $presentations.forEach((presentation, index) => {
+          presentation.id = cache.data[index].id;
+          presentation.slide = cache.data[index].rubrik;
+          presentation.text = cache.data[index].text;
+        });
+      }
+    } catch {
       $presentations.forEach((presentation, index) => {
         presentation.id = cache.data[index].id;
         presentation.slide = cache.data[index].rubrik;
@@ -37,7 +45,6 @@
   let promise = getSlides();
 
   onMount(() => {
-
     promise = getSlides();
 
     createCanvas(bg);
